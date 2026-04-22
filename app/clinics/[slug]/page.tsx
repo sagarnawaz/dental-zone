@@ -263,14 +263,6 @@ const hadeedDoctors = [
     timing: "Wednesday & Saturday - 7:00 PM to 10:00 PM",
     image: doctorPortraits["sidra-nisar"],
   },
-  {
-    id: "bakhtawar-soomro",
-    name: "Dr. Bakhtawar Soomro",
-    qualification: "BDS-RDS, C-ENDO",
-    about: "Ex-House Surgeon Dow Hospital. Experienced and highly skilled.",
-    timing: "Alternate weekends - Friday & Saturday, 5:00 PM to 8:00 PM",
-    image: doctorPortraits["rana-hira-liaquat"],
-  },
 ];
 
 export function generateStaticParams() {
@@ -708,10 +700,10 @@ function HadeedClinicPage() {
               Book appointment
             </Link>
             <Link
-              href="/services"
+              href="/contact"
               className="inline-flex items-center justify-center rounded-full border border-white/18 px-7 py-3 text-sm font-bold text-white"
             >
-              View services
+              Request treatment plan
             </Link>
           </div>
         </div>
