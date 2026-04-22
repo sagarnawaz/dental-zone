@@ -10,14 +10,111 @@ type ClinicPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+type ClinicSlug = "dhabeji" | "hadeed";
+
+type IconProps = {
+  className?: string;
+};
+
+type IconComponent = React.ComponentType<IconProps>;
+
+type FeatureBadgeItem = {
+  title: string;
+  subtitle: string;
+  icon: IconComponent;
+};
+
+type InfoCardItem = {
+  title: string;
+  lines: string[];
+  icon: IconComponent;
+  featured?: boolean;
+};
+
+type ContactItem = {
+  label: string;
+  value: string;
+  icon: IconComponent;
+};
+
+type DhabejiDoctor = {
+  name: string;
+  role: string;
+  image: string;
+  accentClassName: string;
+};
+
+type ServiceMedia = {
+  image: string;
+  alt: string;
+  objectPosition?: string;
+};
+
+type HadeedServiceCard = {
+  id: string;
+  title: string;
+  description: string;
+  benefit: string;
+} & ServiceMedia;
+
+type DoctorProfile = {
+  id: string;
+  name: string;
+  qualification: string;
+  about: string;
+  timing: string;
+  image: string;
+};
+
+const supportedClinicSlugs = clinicSlugs.filter(
+  (slug): slug is ClinicSlug => slug === "dhabeji" || slug === "hadeed",
+);
+
+const fieldBaseClassName =
+  "border border-white/80 bg-white text-sm text-[#003857] outline-none transition focus:border-[#1b4f72]/30 focus:ring-4 focus:ring-[#1b4f72]/10";
+const inputClassName = `${fieldBaseClassName} rounded-full px-5 py-3`;
+const textareaClassName = `${fieldBaseClassName} min-h-32 w-full rounded-[1.4rem] px-5 py-4`;
+
 const dhabejiPage = {
   name: "Dental Clinic - Dhabeji",
   description:
     "Where clinical excellence meets the tranquility of curated care, with advanced imaging, laser dentistry, and a family-first branch experience.",
+  intro:
+    "Where clinical excellence meets the tranquility of curated care. Our Dhabeji facility is equipped with state-of-the-art panoramic imaging and laser dental technology.",
   heroImage:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuDfQ75RJDibWy7WpZlM1EYrJ-igfCj-Eq36ZzEOjibrt5JyhJWF5VQ1t0jrS9uL-xJzPXIamOuhtyDR9cqv_mpiA0ZZ1nXU684nKlE1sY8iUHT3oDIyYq3hqKme79BKZNuvVTrJohjhhmXEyY020w03Rngsa5mC-o76ex0Z0GikcPGunkAAl21s3ibrtiZ5pi6q8-7KRHs-L-_KzkZoNTwpNbEB8eNS7dpfkTjnJWKVL7Faz28hS004vGy7zBvQ8YQf9PkAHc2GEv8",
   mapImage:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuDBLHiRDABfWiYPHwbR6nHM0U9zsBAlb6FAFlZf4DkuIwVeIVHWPVvOicMXYDqnWL0z8FBASOktnvbhV2gJnCMVRt2pndy6FErnLlXGqA0-pGtiJP5Qp_PZ_qDpDiDPpjzCOL9yT574ejoCk4z6VgRE52BGdYvLrKSQUXaG3VcMLkSGt0dyOUMYYzf6VFcwAM7nQkqa1RtaKVV7XTznZvx-5Tojdk-dFA2soX5RfsFCW_gJVB7iuEwLX8uhrLZLlH3w5CgpUmwwK4Y",
+  featureBadges: [
+    {
+      title: "Advanced Tech",
+      subtitle: "3D Guided Surgery",
+      icon: TechIcon,
+    },
+    {
+      title: "Certified Hub",
+      subtitle: "ISO 9001 Standards",
+      icon: ShieldIcon,
+    },
+  ] satisfies FeatureBadgeItem[],
+  infoCards: [
+    {
+      title: "Location",
+      lines: ["Plot 42, Main Industrial Zone, Dhabeji,", "Karachi South"],
+      icon: LocationIcon,
+    },
+    {
+      title: "Contact",
+      lines: ["+92 (21) 3456-7890", "dhabeji@thedentalzone.hc"],
+      icon: PhoneIcon,
+      featured: true,
+    },
+    {
+      title: "Timings",
+      lines: ["Mon - Sat: 09:00 AM - 08:00 PM", "Sun: Closed"],
+      icon: ClockIcon,
+    },
+  ] satisfies InfoCardItem[],
   doctors: [
     {
       name: "Dr. Sarah Ahmed",
@@ -33,7 +130,7 @@ const dhabejiPage = {
         "https://lh3.googleusercontent.com/aida-public/AB6AXuCI8-dcYUXHBU-dNPSDxXxkIvsKcIR7ZGlxyQyIOg3sssUs9ZxbU7LOLU4w3JmdM7I5qqbR9LCzPUVlEywzrVUpR9kNjNiYJMMx4EKPBQHB391kpLgq6AZu80Dbg1olDH0rF8ZbQylpMG6-47cLN2onlNUL02cLtmglhQt4MQOwG2Td2TJJrAtIMoq7PrIvjPL8zfh5FuDbRxPd720irRIZ0U7rpYiRe0IO1WL12UyakzwPdlOwsYg071OFlQlpV1AmVMgQaI2fNFo",
       accentClassName: "bg-[#1b4f72]",
     },
-  ],
+  ] satisfies DhabejiDoctor[],
   services: [
     {
       title: "Endodontics",
@@ -53,7 +150,19 @@ const dhabejiPage = {
         "Modern alignment therapy including clear aligners and ceramic bracing for children and adults.",
       icon: AlignmentIcon,
     },
-  ],
+  ] satisfies Array<{ title: string; description: string; icon: IconComponent }>,
+  contactItems: [
+    {
+      label: "Email inquiry",
+      value: "appointments@thedentalzone.com",
+      icon: MailIcon,
+    },
+    {
+      label: "Emergency line",
+      value: "+92 213 9988 77",
+      icon: SupportIcon,
+    },
+  ] satisfies ContactItem[],
 };
 
 const hadeedPage = {
@@ -64,10 +173,6 @@ const hadeedPage = {
     "https://lh3.googleusercontent.com/aida-public/AB6AXuAcVKgR4jxMWjA3NNQts_jgKcjEl7mIv5xWts5mREBKg0D6t5tAqG2Tt5F_4XOIxY2nUe_msIHBeoeWznl1FnhljYi4Gp-YhcQ7W_m5BPfKZp31hMxDmNFihsMsFHLiKW1VoTR9ABngSPwJsf9Kauc0S7wILIVjlpRIbU6FOE7Q6CzqFjv2808FcNPWSvE2IupnnLqbNUozqsRVuxfwd6JkxMPg6fU1sIfU58dG34jzJSPcF_P1SL0h3tMPGFFMk5yIkSNTQDx_2XE",
   roomImage:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuDCuMxs5sRQ_ezsc6tjGWfzGvSofiqwjB4aRS4kkP08W7hynm-syo7YemW0Z9lV8hfIbd8EDXtBq7tATV1Gb01snNtaDxudL9jfrw0gJ5DUynzEBmg0cxdIsNF8h0izCHPbpizBwmLRK3Ym6koNC2um-uhCvpD_exyBM0FZ0wtPO4Z0Rzxd8V5_whOp4iQ6iADwVyT0tJPW-_X1H9UoE3hOP8L1gcUzgKqX74rOZ0FLPx3JQcnWvQafZ5J-T0-8hIMNUIECvPnQi5Y",
-  gallery: [
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuAqYtO-opvXBGDX_5999fNOvejltbwpAoF0XjDKL3WoEm-Awd5fTWp2W-Ds4lZ8wuClWhI944rhYprd_aVVZAaZsTeST1drczTX_LbdNfkU4QSjDoNQ5t4XEcpa5QV5Jjs19mR1oAXcrLVxO5fE5yiVwp1ARHGd_406V-CbZzKXZBaTuYJn3UFjhb31nYMnDYT-NJ_Ju6OfmB8Z3kyI2loqNsjL3EQg-lIUFD01v2-mz5Ef_McdrPtbunXAMvRw3vYsmg_buzjpfJs",
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDy2XMUFqLDX5N5OT5bie6DYeGkK3B8jNm0dOdLbq-fBmvrwdE0Gv652v1BOmikzLxosVilEJwqAvsz39WhYM4pEWR6dD4SWdv2RGSqGFOPHNHoOLqmS7vh5OSeOYsiLFVrMMSlTkoEjL0iVnRnW8I6FdBxwCBI5X9EfNYOvxDLK3qlYc0vAcsV9xdvPV_BwJnoDuWAg4bmpuRSXa2E47vYTG9BJNYbA8OAuc31rp2ZFSR1JEogzYIXRKdNMOIWz_CTgKn_QxN4QNA",
-  ],
   highlights: [
     "Advanced digital imaging for clearer diagnosis",
     "Specialist-led restorative and surgical planning",
@@ -75,37 +180,92 @@ const hadeedPage = {
   ],
 };
 
-const hadeedServiceImages: Record<
-  string,
+const doctorPortraits = {
+  khubaibAhmedShaikh:
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuCLTm5DBMo6Y65bo1S9kVu_l-9NGkiv_dZ9oJi5lN_dmTj-CSb5q4EgRemlENx3UajQXY1myzEZ2C2CNxKOZkDqezcN6HvZF2OzWyG2GWo408Z5bnNE3YiXDQhpCZA7WBHaMp3sO6V_d64b2S47RDmjzTATJ-lpAVYclF5QsfKPeQVsMzbX8JqU3N8o4uj_0_IaEQD8yEGmEx1L_VdFFeUt3hTM2sxkVF90R4npumex3zAOR97tsNOlU8kj9ewJiCbCOqhQHiWjb8M",
+  wajeehaFayyaz:
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuBVvWt7-xDPfcoWEccsfi9msmqlUjoRp9FeCrXgzEQIyadzdyL0_vIP_gFr35KXig4FyQRnm0aZyKLWg-QmSccI_wB-BqDSwvz3AyC7Qh9BEzkpBMJ5s8k9INvEZs3z7lnpJpMNlNjBPqojuYF26crxehl1KSPdbNwQnYAoYyQWQZy8w8EdSQKxDGlwRI7S6tPDlXz69qQ_Q-uU2N7JyVXCMoxVxyBIZaPsKoB6YEYyVnAf6QG5dFSqLLqwlcw75fOfcgCV3XFtpVQ",
+  sidraNisar:
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuA5M3Tesd_bwkUGp9F9TksgMBky0gWAyVD2ZBGJOFt-bzo1wvupexqCWFeL8wEJ6XKudKLoweb8k3BGtVTu4fO-j5PXcFSky16Sc2s9M40uOUgWgGf3eUf6MTEAAN-vGKS8RQAE2jyUfUnWKOVpEJiP_K0uCBBXg7N2lTheilwyzU1L2L6Zs_osL-A79lpxnvLjggjsesJhoZEkhcYeTO8XaPhb6-cxrDzw1cIqZZk2Sz7ecB0TPkqjQ9VxVonVY72KJSOVL5Ubei8",
+  ranaHiraLiaquat:
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuCdf3IBNhAjcJYfWfXV5uh6SCf_WDd0wsjJM7J5x-FbMnCzRZYS3yXYv6vZZac_LOMCRPnW-igcF-sE2YHJ25yrWNEBtibu2DMI-M_YDqgYQeTuDuWhabKUaywojQUoH5QzYX616wL8J-irKRWpKc3WYN_WB1ktVCegTDSBeFDQKvyd4bAN1nY5OJtiz_nAOj6gJYLfmtUOBD0tzymdcOyNrEfsg8o-M0Qo0QPauzsNUxN-pZbj2Mq6vvhHTbG6GAkpXKCxSoNRcA0",
+} as const;
+
+const hadeedDoctors: DoctorProfile[] = [
   {
-    image: string;
-    alt: string;
-    objectPosition?: string;
-  }
-> = {
-  "detail-checkup": {
+    id: "khubaib-ahmed-shaikh",
+    name: "Dr. Khubaib Ahmed Shaikh",
+    qualification: "BDS-RDS, FCPS Oral and Maxillofacial Surgery",
+    about: "FCPS Dow Hospital Karachi. Experienced and highly skilled.",
+    timing: "Daily except Wednesday and Saturday, 7:00 PM to 10:00 PM",
+    image: doctorPortraits.khubaibAhmedShaikh,
+  },
+  {
+    id: "wajeeha-fayyaz",
+    name: "Dr. Wajeeha Fayyaz",
+    qualification: "BDS-RDS",
+    about: "Ex-House Surgeon Dar Ul Sehat Hospital. Experienced and highly skilled.",
+    timing: "Monday, Tuesday, Wednesday - 4:00 PM to 7:00 PM",
+    image: doctorPortraits.wajeehaFayyaz,
+  },
+  {
+    id: "sidra-nisar",
+    name: "Dr. Sidra Nisar",
+    qualification: "BDS-RDS",
+    about: "Ex-House Surgeon Dar ul Sehat Hospital Karachi. Experienced and highly skilled.",
+    timing: "Monday to Wednesday - 4:00 PM to 7:00 PM",
+    image: doctorPortraits.sidraNisar,
+  },
+  {
+    id: "rana-hira-liaquat",
+    name: "Dr. Rana Hira Liaquat",
+    qualification: "BDS-RDS",
+    about: "Ex-House Surgeon Dar ul Sehat Hospital Karachi. Experienced and highly skilled.",
+    timing: "Thursday to Saturday - 11:00 AM to 3:00 PM; Sunday - 3:00 PM to 7:00 PM",
+    image: doctorPortraits.ranaHiraLiaquat,
+  },
+  {
+    id: "sumaiya-anwer",
+    name: "Dr. Sumaiya Anwer",
+    qualification: "BDS-RDS",
+    about: "Ex-House Surgeon Bahria Hospital. Experienced and highly skilled.",
+    timing: "Thursday to Saturday - 4:00 PM to 7:00 PM",
+    image: doctorPortraits.wajeehaFayyaz,
+  },
+  {
+    id: "noor-ul-ain",
+    name: "Dr. Noor ul Ain",
+    qualification: "BDS-RDS, C-ENDO, C-Prostho",
+    about: "Ex-House Surgeon KMDC. Experienced and highly skilled.",
+    timing: "Wednesday & Saturday - 7:00 PM to 10:00 PM",
+    image: doctorPortraits.sidraNisar,
+  },
+];
+
+const hadeedServiceMedia = {
+  detailCheckup: {
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAATxB-9AyrY74elLxjqyAKjHIog7SHyJcm8NDGialA5T8ko0ItpTUQzuefltEkYs4kZ38QS-zRnDIk8e7Aj-pMSVRBmUoBkWcq53mNRUZJvl_VihPNPVIASQA7fmZ6TFOaNdn-JBvePWeQgc8AhLl2l1uS_dQvbWARcm3viax9xnYs1tsnfOtc6qr2pkYsWki6_hyFLLrMfIAPlSoN4knOUEMBqBLNvjsoczVtUvLq3De9wtBNtzCZlBbjkFrf2xGjpJfL7wXQQWY",
     alt: "Dental consultation and diagnostics setup for detailed checkups and x-ray planning",
   },
-  "scaling-polishing": {
+  scalingPolishing: {
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuA3sQJX05rx9R76bg9s9JrgUBs69R0ai0ppwqG3-JXRhijPe56OOhpu6Ti-Ogckc8fn60GLIga8Q7efFcVRNVO7NjThiPY4Oyo9rCC8Yk31JHHJLWSyQI4I2QbovgQMMO3POjEBQICR5FZ-_o6es222RFXb8-b8xk9mIlBj-8pQMncwp91ZWdNC9I-fh1BpHhO23pHTkeXyI-1Vx9u1KhapQ2zDHQy9enN4kyE9AsEdkbRIp1KNixcgC2ebRwtDX4WDoU5lJ_iNfjA",
     alt: "Modern dental treatment room prepared for cleaning, scaling, and polishing care",
   },
-  "surgical-extraction": {
+  surgicalExtraction: {
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuCLTm5DBMo6Y65bo1S9kVu_l-9NGkiv_dZ9oJi5lN_dmTj-CSb5q4EgRemlENx3UajQXY1myzEZ2C2CNxKOZkDqezcN6HvZF2OzWyG2GWo408Z5bnNE3YiXDQhpCZA7WBHaMp3sO6V_d64b2S47RDmjzTATJ-lpAVYclF5QsfKPeQVsMzbX8JqU3N8o4uj_0_IaEQD8yEGmEx1L_VdFFeUt3hTM2sxkVF90R4npumex3zAOR97tsNOlU8kj9ewJiCbCOqhQHiWjb8M",
     alt: "Specialist oral surgery consultant for complex surgical extraction planning",
     objectPosition: "center top",
   },
-  "teeth-whitening": {
+  teethWhitening: {
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuBVvWt7-xDPfcoWEccsfi9msmqlUjoRp9FeCrXgzEQIyadzdyL0_vIP_gFr35KXig4FyQRnm0aZyKLWg-QmSccI_wB-BqDSwvz3AyC7Qh9BEzkpBMJ5s8k9INvEZs3z7lnpJpMNlNjBPqojuYF26crxehl1KSPdbNwQnYAoYyQWQZy8w8EdSQKxDGlwRI7S6tPDlXz69qQ_Q-uU2N7JyVXCMoxVxyBIZaPsKoB6YEYyVnAf6QG5dFSqLLqwlcw75fOfcgCV3XFtpVQ",
     alt: "Aesthetic dental care consultation supporting brighter smile and whitening treatments",
     objectPosition: "center top",
   },
-  "root-canal": {
+  rootCanal: {
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDfQ75RJDibWy7WpZlM1EYrJ-igfCj-Eq36ZzEOjibrt5JyhJWF5VQ1t0jrS9uL-xJzPXIamOuhtyDR9cqv_mpiA0ZZ1nXU684nKlE1sY8iUHT3oDIyYq3hqKme79BKZNuvVTrJohjhhmXEyY020w03Rngsa5mC-o76ex0Z0GikcPGunkAAl21s3ibrtiZ5pi6q8-7KRHs-L-_KzkZoNTwpNbEB8eNS7dpfkTjnJWKVL7Faz28hS004vGy7zBvQ8YQf9PkAHc2GEv8",
     alt: "Clinical dental environment prepared for precise root canal treatment",
@@ -115,7 +275,7 @@ const hadeedServiceImages: Record<
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAqYtO-opvXBGDX_5999fNOvejltbwpAoF0XjDKL3WoEm-Awd5fTWp2W-Ds4lZ8wuClWhI944rhYprd_aVVZAaZsTeST1drczTX_LbdNfkU4QSjDoNQ5t4XEcpa5QV5Jjs19mR1oAXcrLVxO5fE5yiVwp1ARHGd_406V-CbZzKXZBaTuYJn3UFjhb31nYMnDYT-NJ_Ju6OfmB8Z3kyI2loqNsjL3EQg-lIUFD01v2-mz5Ef_McdrPtbunXAMvRw3vYsmg_buzjpfJs",
     alt: "Dental treatment bay supporting restorative procedures such as fillings",
   },
-  "crown-bridges": {
+  crownBridges: {
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDy2XMUFqLDX5N5OT5bie6DYeGkK3B8jNm0dOdLbq-fBmvrwdE0Gv652v1BOmikzLxosVilEJwqAvsz39WhYM4pEWR6dD4SWdv2RGSqGFOPHNHoOLqmS7vh5OSeOYsiLFVrMMSlTkoEjL0iVnRnW8I6FdBxwCBI5X9EfNYOvxDLK3qlYc0vAcsV9xdvPV_BwJnoDuWAg4bmpuRSXa2E47vYTG9BJNYbA8OAuc31rp2ZFSR1JEogzYIXRKdNMOIWz_CTgKn_QxN4QNA",
     alt: "Premium restorative dentistry setting for crowns and bridges treatment planning",
@@ -126,181 +286,126 @@ const hadeedServiceImages: Record<
     alt: "Oral surgery specialist supporting safe tooth extraction procedures",
     objectPosition: "center top",
   },
-};
+} as const satisfies Record<string, ServiceMedia>;
 
-const hadeedServiceCards = [
-  {
+type HadeedServiceMediaKey = keyof typeof hadeedServiceMedia;
+
+const hadeedServiceCards: HadeedServiceCard[] = [
+  createHadeedServiceCard("detailCheckup", {
     id: "signature-consultation",
     title: "Signature Consultation",
     description:
       "Detailed diagnostics, chairside evaluation, and step-by-step treatment mapping for patients seeking clarity before starting care.",
     benefit:
       "Ideal for full-mouth planning, second opinions, and patients comparing restorative options.",
-    ...hadeedServiceImages["detail-checkup"],
-  },
-  {
+  }),
+  createHadeedServiceCard("scalingPolishing", {
     id: "hygiene-maintenance",
     title: "Hygiene & Gum Maintenance",
     description:
       "Professional scaling and polishing tailored for long-term gum health, fresher breath, and a cleaner everyday smile.",
     benefit:
       "Supports prevention-focused visits and maintenance for families who want consistent branch care.",
-    ...hadeedServiceImages["scaling-polishing"],
-  },
-  {
+  }),
+  createHadeedServiceCard("surgicalExtraction", {
     id: "surgical-planning",
     title: "Consultant Surgical Planning",
     description:
       "Specialist-led assessment for complex extractions, impacted teeth, and cases that need careful sequencing and recovery guidance.",
     benefit:
       "Best for patients who want expert review before committing to oral surgery treatment.",
-    ...hadeedServiceImages["surgical-extraction"],
-  },
-  {
+  }),
+  createHadeedServiceCard("teethWhitening", {
     id: "smile-brightening",
     title: "Smile Brightening",
     description:
       "In-branch whitening support designed for cleaner presentation, confidence, and event-ready smile refreshes.",
     benefit:
       "A good fit for patients seeking a polished cosmetic uplift with professional supervision.",
-    ...hadeedServiceImages["teeth-whitening"],
-  },
-  {
+  }),
+  createHadeedServiceCard("rootCanal", {
     id: "endodontic-care",
     title: "Root Canal Care",
     description:
       "Tooth-saving endodontic treatment focused on relieving pain, protecting structure, and preserving natural function.",
     benefit:
       "Recommended when patients want to avoid extraction and keep long-term restorative options open.",
-    ...hadeedServiceImages["root-canal"],
-  },
-  {
+  }),
+  createHadeedServiceCard("fillings", {
     id: "aesthetic-fillings",
     title: "Aesthetic Fillings",
     description:
       "Refined restorative dentistry for cavities, worn surfaces, and small fractures with a neat, comfort-first approach.",
     benefit:
       "Helps restore function while keeping everyday dental repairs discreet and natural looking.",
-    ...hadeedServiceImages.fillings,
-  },
-  {
+  }),
+  createHadeedServiceCard("crownBridges", {
     id: "restorative-rehabilitation",
     title: "Crowns & Bridges",
     description:
       "Fixed restorative solutions for weakened, missing, or heavily damaged teeth planned with aesthetics and bite stability in mind.",
     benefit:
       "Useful for patients rebuilding confidence, chewing comfort, and long-term smile support.",
-    ...hadeedServiceImages["crown-bridges"],
-  },
-  {
+  }),
+  createHadeedServiceCard("extractions", {
     id: "expert-extractions",
     title: "Expert Extractions",
     description:
       "Comfort-focused tooth removal supported by clinical judgment, clear explanation, and aftercare planning.",
     benefit:
       "For teeth that cannot be predictably restored and require a safer next-step treatment path.",
-    ...hadeedServiceImages.extractions,
-  },
+  }),
 ];
 
-const doctorPortraits: Record<string, string> = {
-  "khubaib-ahmed-shaikh":
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuCLTm5DBMo6Y65bo1S9kVu_l-9NGkiv_dZ9oJi5lN_dmTj-CSb5q4EgRemlENx3UajQXY1myzEZ2C2CNxKOZkDqezcN6HvZF2OzWyG2GWo408Z5bnNE3YiXDQhpCZA7WBHaMp3sO6V_d64b2S47RDmjzTATJ-lpAVYclF5QsfKPeQVsMzbX8JqU3N8o4uj_0_IaEQD8yEGmEx1L_VdFFeUt3hTM2sxkVF90R4npumex3zAOR97tsNOlU8kj9ewJiCbCOqhQHiWjb8M",
-  "wajeeha-fayyaz":
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuBVvWt7-xDPfcoWEccsfi9msmqlUjoRp9FeCrXgzEQIyadzdyL0_vIP_gFr35KXig4FyQRnm0aZyKLWg-QmSccI_wB-BqDSwvz3AyC7Qh9BEzkpBMJ5s8k9INvEZs3z7lnpJpMNlNjBPqojuYF26crxehl1KSPdbNwQnYAoYyQWQZy8w8EdSQKxDGlwRI7S6tPDlXz69qQ_Q-uU2N7JyVXCMoxVxyBIZaPsKoB6YEYyVnAf6QG5dFSqLLqwlcw75fOfcgCV3XFtpVQ",
-  "sidra-nisar":
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuA5M3Tesd_bwkUGp9F9TksgMBky0gWAyVD2ZBGJOFt-bzo1wvupexqCWFeL8wEJ6XKudKLoweb8k3BGtVTu4fO-j5PXcFSky16Sc2s9M40uOUgWgGf3eUf6MTEAAN-vGKS8RQAE2jyUfUnWKOVpEJiP_K0uCBBXg7N2lTheilwyzU1L2L6Zs_osL-A79lpxnvLjggjsesJhoZEkhcYeTO8XaPhb6-cxrDzw1cIqZZk2Sz7ecB0TPkqjQ9VxVonVY72KJSOVL5Ubei8",
-  "rana-hira-liaquat":
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuCdf3IBNhAjcJYfWfXV5uh6SCf_WDd0wsjJM7J5x-FbMnCzRZYS3yXYv6vZZac_LOMCRPnW-igcF-sE2YHJ25yrWNEBtibu2DMI-M_YDqgYQeTuDuWhabKUaywojQUoH5QzYX616wL8J-irKRWpKc3WYN_WB1ktVCegTDSBeFDQKvyd4bAN1nY5OJtiz_nAOj6gJYLfmtUOBD0tzymdcOyNrEfsg8o-M0Qo0QPauzsNUxN-pZbj2Mq6vvhHTbG6GAkpXKCxSoNRcA0",
+const clinicPageConfigs: Record<
+  ClinicSlug,
+  {
+    name: string;
+    description: string;
+    Component: React.ComponentType;
+  }
+> = {
+  dhabeji: {
+    name: dhabejiPage.name,
+    description: dhabejiPage.description,
+    Component: DhabejiClinicPage,
+  },
+  hadeed: {
+    name: hadeedPage.name,
+    description: hadeedPage.description,
+    Component: HadeedClinicPage,
+  },
 };
 
-const hadeedDoctors = [
-  {
-    id: "khubaib-ahmed-shaikh",
-    name: "Dr. Khubaib Ahmed Shaikh",
-    qualification: "BDS-RDS, FCPS Oral and Maxillofacial Surgery",
-    about: "FCPS Dow Hospital Karachi. Experienced and highly skilled.",
-    timing: "Daily except Wednesday and Saturday, 7:00 PM to 10:00 PM",
-    image: doctorPortraits["khubaib-ahmed-shaikh"],
-  },
-  {
-    id: "wajeeha-fayyaz",
-    name: "Dr. Wajeeha Fayyaz",
-    qualification: "BDS-RDS",
-    about: "Ex-House Surgeon Dar Ul Sehat Hospital. Experienced and highly skilled.",
-    timing: "Monday, Tuesday, Wednesday - 4:00 PM to 7:00 PM",
-    image: doctorPortraits["wajeeha-fayyaz"],
-  },
-  {
-    id: "sidra-nisar",
-    name: "Dr. Sidra Nisar",
-    qualification: "BDS-RDS",
-    about: "Ex-House Surgeon Dar ul Sehat Hospital Karachi. Experienced and highly skilled.",
-    timing: "Monday to Wednesday - 4:00 PM to 7:00 PM",
-    image: doctorPortraits["sidra-nisar"],
-  },
-  {
-    id: "rana-hira-liaquat",
-    name: "Dr. Rana Hira Liaquat",
-    qualification: "BDS-RDS",
-    about: "Ex-House Surgeon Dar ul Sehat Hospital Karachi. Experienced and highly skilled.",
-    timing: "Thursday to Saturday - 11:00 AM to 3:00 PM; Sunday - 3:00 PM to 7:00 PM",
-    image: doctorPortraits["rana-hira-liaquat"],
-  },
-  {
-    id: "sumaiya-anwer",
-    name: "Dr. Sumaiya Anwer",
-    qualification: "BDS-RDS",
-    about: "Ex-House Surgeon Bahria Hospital. Experienced and highly skilled.",
-    timing: "Thursday to Saturday - 4:00 PM to 7:00 PM",
-    image: doctorPortraits["wajeeha-fayyaz"],
-  },
-  {
-    id: "noor-ul-ain",
-    name: "Dr. Noor ul Ain",
-    qualification: "BDS-RDS, C-ENDO, C-Prostho",
-    about: "Ex-House Surgeon KMDC. Experienced and highly skilled.",
-    timing: "Wednesday & Saturday - 7:00 PM to 10:00 PM",
-    image: doctorPortraits["sidra-nisar"],
-  },
-];
-
 export function generateStaticParams() {
-  return clinicSlugs.map((slug) => ({ slug }));
+  return supportedClinicSlugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: ClinicPageProps): Promise<Metadata> {
   const { slug } = await params;
 
-  if (slug === "dhabeji") {
-    return {
-      title: `${dhabejiPage.name} | The Dental Zone`,
-      description: dhabejiPage.description,
-    };
+  if (!isClinicSlug(slug)) {
+    return {};
   }
 
-  if (slug === "hadeed") {
-    return {
-      title: `${hadeedPage.name} | The Dental Zone`,
-      description: hadeedPage.description,
-    };
-  }
+  const clinicPage = clinicPageConfigs[slug];
 
-  return {};
+  return {
+    title: `${clinicPage.name} | The Dental Zone`,
+    description: clinicPage.description,
+  };
 }
 
 export default async function ClinicPage({ params }: ClinicPageProps) {
   const { slug } = await params;
 
-  if (slug !== "dhabeji" && slug !== "hadeed") {
+  if (!isClinicSlug(slug)) {
     notFound();
   }
 
-  if (slug === "dhabeji") {
-    return <DhabejiClinicPage />;
-  }
+  const PageComponent = clinicPageConfigs[slug].Component;
 
-  return <HadeedClinicPage />;
+  return <PageComponent />;
 }
 
 function DhabejiClinicPage() {
@@ -322,23 +427,14 @@ function DhabejiClinicPage() {
                   <span className="text-[#1b4f72]">Dhabeji</span>
                 </h1>
                 <p className="mt-5 max-w-xl text-base leading-7 text-[#5b6672] sm:mt-6 sm:text-lg sm:leading-9">
-                  Where clinical excellence meets the tranquility of curated care. Our Dhabeji
-                  facility is equipped with state-of-the-art panoramic imaging and laser dental
-                  technology.
+                  {dhabejiPage.intro}
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <FeatureBadge
-                  title="Advanced Tech"
-                  subtitle="3D Guided Surgery"
-                  icon={<TechIcon className="h-6 w-6" />}
-                />
-                <FeatureBadge
-                  title="Certified Hub"
-                  subtitle="ISO 9001 Standards"
-                  icon={<ShieldIcon className="h-6 w-6" />}
-                />
+                {dhabejiPage.featureBadges.map((item) => (
+                  <FeatureBadge key={item.title} {...item} />
+                ))}
               </div>
             </div>
 
@@ -362,22 +458,9 @@ function DhabejiClinicPage() {
 
       <section className="px-4 py-6 sm:px-6 sm:py-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-3">
-          <InfoCard
-            icon={<LocationIcon className="h-6 w-6" />}
-            title="Location"
-            lines={["Plot 42, Main Industrial Zone, Dhabeji,", "Karachi South"]}
-          />
-          <InfoCard
-            featured
-            icon={<PhoneIcon className="h-6 w-6" />}
-            title="Contact"
-            lines={["+92 (21) 3456-7890", "dhabeji@thedentalzone.hc"]}
-          />
-          <InfoCard
-            icon={<ClockIcon className="h-6 w-6" />}
-            title="Timings"
-            lines={["Mon - Sat: 09:00 AM - 08:00 PM", "Sun: Closed"]}
-          />
+          {dhabejiPage.infoCards.map((item) => (
+            <InfoCard key={item.title} {...item} />
+          ))}
         </div>
       </section>
 
@@ -451,7 +534,9 @@ function DhabejiClinicPage() {
                       className="object-cover grayscale transition duration-700 group-hover:grayscale-0"
                     />
                   </div>
-                  <div className={`absolute left-[-0.4rem] top-8 h-14 w-1 rounded-full ${doctor.accentClassName}`} />
+                  <div
+                    className={`absolute left-[-0.4rem] top-8 h-14 w-1 rounded-full ${doctor.accentClassName}`}
+                  />
                 </div>
                 <h3 className="mt-5 text-2xl font-bold tracking-[-0.03em] text-[#003857]">
                   {doctor.name}
@@ -485,16 +570,9 @@ function DhabejiClinicPage() {
             </h2>
 
             <div className="mt-8 space-y-6">
-              <ContactRow
-                icon={<MailIcon className="h-4 w-4" />}
-                label="Email inquiry"
-                value="appointments@thedentalzone.com"
-              />
-              <ContactRow
-                icon={<SupportIcon className="h-4 w-4" />}
-                label="Emergency line"
-                value="+92 213 9988 77"
-              />
+              {dhabejiPage.contactItems.map((item) => (
+                <ContactRow key={item.label} {...item} />
+              ))}
             </div>
 
             <form className="mt-10 space-y-4">
@@ -503,14 +581,14 @@ function DhabejiClinicPage() {
                   name="fullName"
                   aria-label="Full Name"
                   placeholder="Full Name"
-                  className="rounded-full border border-white/80 bg-white px-5 py-3 text-sm text-[#003857] outline-none transition focus:border-[#1b4f72]/30 focus:ring-4 focus:ring-[#1b4f72]/10"
+                  className={inputClassName}
                 />
                 <input
                   name="email"
                   type="email"
                   aria-label="Email"
                   placeholder="Email"
-                  className="rounded-full border border-white/80 bg-white px-5 py-3 text-sm text-[#003857] outline-none transition focus:border-[#1b4f72]/30 focus:ring-4 focus:ring-[#1b4f72]/10"
+                  className={inputClassName}
                 />
               </div>
               <textarea
@@ -518,7 +596,7 @@ function DhabejiClinicPage() {
                 rows={4}
                 aria-label="Dental concern"
                 placeholder="Tell us about your dental concern"
-                className="min-h-32 w-full rounded-[1.4rem] border border-white/80 bg-white px-5 py-4 text-sm text-[#003857] outline-none transition focus:border-[#1b4f72]/30 focus:ring-4 focus:ring-[#1b4f72]/10"
+                className={textareaClassName}
               />
               <Link
                 href="/contact"
@@ -535,11 +613,6 @@ function DhabejiClinicPage() {
 }
 
 function HadeedClinicPage() {
-  const doctorSlides = hadeedDoctors.map((doctor) => ({
-    ...doctor,
-    image: doctor.image ?? hadeedPage.heroImage,
-  }));
-
   return (
     <div className="pb-20 sm:pb-24">
       <section className="relative overflow-hidden px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-12 lg:px-10">
@@ -598,7 +671,9 @@ function HadeedClinicPage() {
                   <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.28em] text-white/64">
                     Appointment Window
                   </p>
-                  <p className="mt-4 text-2xl font-bold tracking-[-0.04em] sm:mt-5 sm:text-3xl">Mon - Sat</p>
+                  <p className="mt-4 text-2xl font-bold tracking-[-0.04em] sm:mt-5 sm:text-3xl">
+                    Mon - Sat
+                  </p>
                   <p className="mt-2 text-white/82">11:00 AM to 10:00 PM</p>
                   <p className="mt-5 text-sm leading-7 text-[#cce5ff]">
                     Iftikhar Memorial Hospital, Gulshan-e-Hadeed Phase 2, Karachi
@@ -632,7 +707,11 @@ function HadeedClinicPage() {
                       fill
                       sizes="(min-width: 1280px) 22vw, (min-width: 768px) 42vw, 100vw"
                       className="object-cover transition duration-700 group-hover:scale-105"
-                      style={service.objectPosition ? { objectPosition: service.objectPosition } : undefined}
+                      style={
+                        service.objectPosition
+                          ? { objectPosition: service.objectPosition }
+                          : undefined
+                      }
                     />
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,56,87,0.04),rgba(0,56,87,0.62))]" />
                     <div className="absolute left-4 top-4 inline-flex rounded-full bg-white/88 px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.22em] text-[#003857]">
@@ -644,9 +723,7 @@ function HadeedClinicPage() {
                     <h3 className="text-lg font-bold tracking-[-0.03em] text-[#003857]">
                       {service.title}
                     </h3>
-                    <p className="mt-3 text-sm leading-7 text-[#67727e]">
-                      {service.description}
-                    </p>
+                    <p className="mt-3 text-sm leading-7 text-[#67727e]">{service.description}</p>
                     <p className="mt-4 rounded-[1.1rem] bg-[#eef4f7] px-4 py-3 text-sm leading-6 text-[#003857]/80">
                       {service.benefit}
                     </p>
@@ -673,7 +750,7 @@ function HadeedClinicPage() {
           </div>
 
           <div className="mt-12">
-            <DoctorSwiper doctors={doctorSlides} />
+            <DoctorSwiper doctors={hadeedDoctors} />
           </div>
         </div>
       </section>
@@ -712,19 +789,11 @@ function HadeedClinicPage() {
   );
 }
 
-function FeatureBadge({
-  title,
-  subtitle,
-  icon,
-}: {
-  title: string;
-  subtitle: string;
-  icon: React.ReactNode;
-}) {
+function FeatureBadge({ title, subtitle, icon: Icon }: FeatureBadgeItem) {
   return (
     <div className="flex items-center gap-3 rounded-full bg-white px-5 py-4 shadow-[0_12px_28px_rgba(15,23,42,0.04)]">
       <div className="grid h-10 w-10 place-items-center rounded-full bg-[#eef4f8] text-[#003857]">
-        {icon}
+        <Icon className="h-6 w-6" />
       </div>
       <div>
         <p className="text-sm font-bold text-[#003857]">{title}</p>
@@ -734,17 +803,7 @@ function FeatureBadge({
   );
 }
 
-function InfoCard({
-  icon,
-  title,
-  lines,
-  featured = false,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  lines: string[];
-  featured?: boolean;
-}) {
+function InfoCard({ title, lines, icon: Icon, featured = false }: InfoCardItem) {
   return (
     <article
       className={`rounded-[1.8rem] p-8 shadow-[0_14px_40px_rgba(15,23,42,0.04)] ${
@@ -756,12 +815,16 @@ function InfoCard({
           featured ? "bg-white/12 text-white" : "bg-[#eef4f8] text-[#003857]"
         }`}
       >
-        {icon}
+        <Icon className="h-6 w-6" />
       </div>
       <h3 className={`mt-8 text-lg font-bold ${featured ? "text-white" : "text-[#003857]"}`}>
         {title}
       </h3>
-      <div className={`mt-3 space-y-1 text-sm leading-7 ${featured ? "text-white/84" : "text-[#69737d]"}`}>
+      <div
+        className={`mt-3 space-y-1 text-sm leading-7 ${
+          featured ? "text-white/84" : "text-[#69737d]"
+        }`}
+      >
         {lines.map((line) => (
           <p key={line}>{line}</p>
         ))}
@@ -770,19 +833,11 @@ function InfoCard({
   );
 }
 
-function ContactRow({
-  icon,
-  label,
-  value,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-}) {
+function ContactRow({ label, value, icon: Icon }: ContactItem) {
   return (
     <div className="flex items-start gap-4">
       <div className="grid h-10 w-10 place-items-center rounded-full bg-white text-[#003857] shadow-[0_10px_24px_rgba(15,23,42,0.05)]">
-        {icon}
+        <Icon className="h-4 w-4" />
       </div>
       <div>
         <p className="text-[0.65rem] font-extrabold uppercase tracking-[0.24em] text-[#7b8590]">
@@ -794,9 +849,19 @@ function ContactRow({
   );
 }
 
-type IconProps = {
-  className?: string;
-};
+function createHadeedServiceCard(
+  mediaKey: HadeedServiceMediaKey,
+  card: Omit<HadeedServiceCard, keyof ServiceMedia>,
+): HadeedServiceCard {
+  return {
+    ...card,
+    ...hadeedServiceMedia[mediaKey],
+  };
+}
+
+function isClinicSlug(slug: string): slug is ClinicSlug {
+  return supportedClinicSlugs.includes(slug as ClinicSlug);
+}
 
 function ArrowRightIcon({ className }: IconProps) {
   return (
@@ -877,7 +942,12 @@ function SupportIcon({ className }: IconProps) {
 function TechIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      <path d="M12 4v4M12 16v4M4 12h4M16 12h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path
+        d="M12 4v4M12 16v4M4 12h4M16 12h4"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
       <circle cx="12" cy="12" r="4.2" stroke="currentColor" strokeWidth="2" />
     </svg>
   );
@@ -887,7 +957,13 @@ function ShieldIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
       <path d="M12 4 5.5 6.3V11c0 4 2.7 7.5 6.5 9 3.8-1.5 6.5-5 6.5-9V6.3L12 4Z" fill="currentColor" />
-      <path d="m9.3 12.2 1.8 1.8 3.6-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="m9.3 12.2 1.8 1.8 3.6-4"
+        stroke="white"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
