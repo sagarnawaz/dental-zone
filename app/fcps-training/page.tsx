@@ -5,7 +5,7 @@ import Link from "next/link";
 import { appointmentHref, callHref, fcpsTraining } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "FCPS Online Training | Zia Dental Care",
+  title: "FCPS Online Training | The Dental Zone",
   description: "Online FCPS mentoring with structured modules, case discussion, and exam-focused support.",
 };
 
@@ -31,18 +31,28 @@ export default function FcpsTrainingPage() {
           </div>
         </div>
         <div className="relative overflow-hidden rounded-[2rem] shadow-[0_24px_70px_rgba(15,23,42,0.12)]">
-          <Image src={fcpsTraining.image} alt={fcpsTraining.title} width={1200} height={1000} className="h-[28rem] w-full object-cover sm:h-[36rem]" />
+          <Image
+            src={fcpsTraining.image}
+            alt={fcpsTraining.title}
+            width={1200}
+            height={1000}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="h-[28rem] w-full object-cover sm:h-[36rem]"
+            preload
+          />
         </div>
       </section>
 
       <section className="mx-auto mt-14 max-w-7xl">
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-2 items-stretch gap-4 sm:gap-5 lg:grid-cols-4">
           {fcpsTraining.modules.map((module) => (
-            <article key={module} className="card-surface p-6">
+            <article key={module} className="card-surface h-full min-w-0 p-4 sm:p-6">
               <p className="text-[0.72rem] font-bold uppercase tracking-[0.24em] text-[var(--color-secondary)]">
                 Online Module
               </p>
-              <h2 className="mt-4 text-2xl font-extrabold tracking-[-0.04em] text-[var(--color-primary)]">{module}</h2>
+              <h2 className="mt-4 break-words text-xl font-extrabold tracking-[-0.04em] text-[var(--color-primary)] sm:text-2xl">
+                {module}
+              </h2>
             </article>
           ))}
         </div>

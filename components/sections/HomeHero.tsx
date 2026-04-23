@@ -45,11 +45,11 @@ export default function HomeHero() {
           </div>
         </div>
 
-        <div className="mt-10 grid gap-4 border-t border-white/10 pt-8 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-3 border-t border-white/10 pt-8 sm:gap-4 lg:grid-cols-4">
           {trustStats.map((stat) => (
-            <div key={stat.label} className="rounded-[1.5rem] border border-white/10 bg-white/8 px-5 py-5 backdrop-blur-sm">
-              <p className="font-heading text-4xl text-white">{stat.value}</p>
-              <p className="mt-2 text-sm uppercase tracking-[0.22em] text-white/55">{stat.label}</p>
+            <div key={stat.label} className="min-w-0 rounded-[1.5rem] border border-white/10 bg-white/8 px-4 py-4 backdrop-blur-sm sm:px-5 sm:py-5">
+              <p className="break-words font-heading text-2xl leading-tight text-white sm:text-4xl">{stat.value}</p>
+              <p className="mt-2 text-[0.68rem] uppercase tracking-[0.18em] text-white/55 sm:text-sm sm:tracking-[0.22em]">{stat.label}</p>
             </div>
           ))}
         </div>

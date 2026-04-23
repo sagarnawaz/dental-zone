@@ -4,16 +4,16 @@ import { toInitials } from "@/lib/utils";
 
 export default function ProfileCard({ profile }: { profile: Profile }) {
   return (
-    <Card className="flex h-full flex-col gap-5 p-6">
+    <Card className="flex h-full flex-col gap-4 p-4 sm:gap-5 sm:p-6">
       <div className="flex items-start gap-4">
-        <div className="grid size-14 shrink-0 place-items-center rounded-full bg-[linear-gradient(135deg,#0a2540,#0d5e6e)] font-semibold text-white shadow-[0_16px_35px_rgba(10,37,64,0.18)]">
+        <div className="grid size-12 shrink-0 place-items-center rounded-full bg-[linear-gradient(135deg,#0a2540,#0d5e6e)] font-semibold text-white shadow-[0_16px_35px_rgba(10,37,64,0.18)] sm:size-14">
           {toInitials(profile.name)}
         </div>
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-primary)]/50">
+        <div className="min-w-0">
+          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[var(--color-primary)]/50 sm:text-xs">
             {profile.role}
           </p>
-          <h3 className="mt-2 font-heading text-3xl leading-tight text-[var(--color-primary)]">
+          <h3 className="mt-2 break-words font-heading text-xl leading-tight text-[var(--color-primary)] sm:text-3xl">
             {profile.name}
           </h3>
         </div>
@@ -30,20 +30,22 @@ export default function ProfileCard({ profile }: { profile: Profile }) {
         ))}
       </div>
 
-      <p className="text-sm leading-7 text-[var(--color-text-soft)]">{profile.summary}</p>
+      <p className="break-words text-sm leading-7 text-[var(--color-text-soft)]">{profile.summary}</p>
 
       <div className="grid gap-3 rounded-[1.5rem] border border-[var(--border-soft)] bg-[var(--surface-muted)] p-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-primary)]/45">
             Specialties
           </p>
-          <p className="mt-2 text-sm leading-7 text-[var(--color-text)]/75">{profile.specialties.join(" • ")}</p>
+          <p className="mt-2 break-words text-sm leading-7 text-[var(--color-text)]/75">
+            {profile.specialties.join(" | ")}
+          </p>
         </div>
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-primary)]/45">
             Availability
           </p>
-          <p className="mt-2 text-sm leading-7 text-[var(--color-text)]/75">{profile.availability}</p>
+          <p className="mt-2 break-words text-sm leading-7 text-[var(--color-text)]/75">{profile.availability}</p>
         </div>
       </div>
     </Card>

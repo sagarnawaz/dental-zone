@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
   }
 
   return {
-    title: `${service.name} | Zia Dental Care`,
+    title: `${service.name} | The Dental Zone`,
     description: service.detail,
   };
 }
@@ -64,7 +64,15 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </div>
 
         <div className="relative overflow-hidden rounded-[2rem] shadow-[0_28px_80px_rgba(15,23,42,0.12)]">
-          <Image src={service.image} alt={service.name} width={1200} height={1000} className="h-[28rem] w-full object-cover sm:h-[38rem]" />
+          <Image
+            src={service.image}
+            alt={service.name}
+            width={1200}
+            height={1000}
+            sizes="(min-width: 1024px) 55vw, 100vw"
+            className="h-[28rem] w-full object-cover sm:h-[38rem]"
+            preload
+          />
         </div>
       </section>
     </div>

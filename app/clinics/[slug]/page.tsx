@@ -3,6 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import ClinicHeroSlider, {
+  type ClinicHeroHighlight,
+  type ClinicHeroMetric,
+  type ClinicHeroSlide,
+} from "@/components/sections/ClinicHeroSlider";
 import DoctorSwiper from "@/components/sections/DoctorSwiper";
 import { clinicSlugs } from "@/data/site";
 
@@ -17,12 +22,6 @@ type IconProps = {
 };
 
 type IconComponent = React.ComponentType<IconProps>;
-
-type FeatureBadgeItem = {
-  title: string;
-  subtitle: string;
-  icon: IconComponent;
-};
 
 type InfoCardItem = {
   title: string;
@@ -85,18 +84,6 @@ const dhabejiPage = {
     "https://lh3.googleusercontent.com/aida-public/AB6AXuDfQ75RJDibWy7WpZlM1EYrJ-igfCj-Eq36ZzEOjibrt5JyhJWF5VQ1t0jrS9uL-xJzPXIamOuhtyDR9cqv_mpiA0ZZ1nXU684nKlE1sY8iUHT3oDIyYq3hqKme79BKZNuvVTrJohjhhmXEyY020w03Rngsa5mC-o76ex0Z0GikcPGunkAAl21s3ibrtiZ5pi6q8-7KRHs-L-_KzkZoNTwpNbEB8eNS7dpfkTjnJWKVL7Faz28hS004vGy7zBvQ8YQf9PkAHc2GEv8",
   mapImage:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuDBLHiRDABfWiYPHwbR6nHM0U9zsBAlb6FAFlZf4DkuIwVeIVHWPVvOicMXYDqnWL0z8FBASOktnvbhV2gJnCMVRt2pndy6FErnLlXGqA0-pGtiJP5Qp_PZ_qDpDiDPpjzCOL9yT574ejoCk4z6VgRE52BGdYvLrKSQUXaG3VcMLkSGt0dyOUMYYzf6VFcwAM7nQkqa1RtaKVV7XTznZvx-5Tojdk-dFA2soX5RfsFCW_gJVB7iuEwLX8uhrLZLlH3w5CgpUmwwK4Y",
-  featureBadges: [
-    {
-      title: "Advanced Tech",
-      subtitle: "3D Guided Surgery",
-      icon: TechIcon,
-    },
-    {
-      title: "Certified Hub",
-      subtitle: "ISO 9001 Standards",
-      icon: ShieldIcon,
-    },
-  ] satisfies FeatureBadgeItem[],
   infoCards: [
     {
       title: "Location",
@@ -173,11 +160,6 @@ const hadeedPage = {
     "https://lh3.googleusercontent.com/aida-public/AB6AXuAcVKgR4jxMWjA3NNQts_jgKcjEl7mIv5xWts5mREBKg0D6t5tAqG2Tt5F_4XOIxY2nUe_msIHBeoeWznl1FnhljYi4Gp-YhcQ7W_m5BPfKZp31hMxDmNFihsMsFHLiKW1VoTR9ABngSPwJsf9Kauc0S7wILIVjlpRIbU6FOE7Q6CzqFjv2808FcNPWSvE2IupnnLqbNUozqsRVuxfwd6JkxMPg6fU1sIfU58dG34jzJSPcF_P1SL0h3tMPGFFMk5yIkSNTQDx_2XE",
   roomImage:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuDCuMxs5sRQ_ezsc6tjGWfzGvSofiqwjB4aRS4kkP08W7hynm-syo7YemW0Z9lV8hfIbd8EDXtBq7tATV1Gb01snNtaDxudL9jfrw0gJ5DUynzEBmg0cxdIsNF8h0izCHPbpizBwmLRK3Ym6koNC2um-uhCvpD_exyBM0FZ0wtPO4Z0Rzxd8V5_whOp4iQ6iADwVyT0tJPW-_X1H9UoE3hOP8L1gcUzgKqX74rOZ0FLPx3JQcnWvQafZ5J-T0-8hIMNUIECvPnQi5Y",
-  highlights: [
-    "Advanced digital imaging for clearer diagnosis",
-    "Specialist-led restorative and surgical planning",
-    "Designed for calm, premium branch visits",
-  ],
 };
 
 const doctorPortraits = {
@@ -357,6 +339,109 @@ const hadeedServiceCards: HadeedServiceCard[] = [
   }),
 ];
 
+const dhabejiHeroHighlights: ClinicHeroHighlight[] = [
+  {
+    title: "Advanced Tech",
+    description: "Panoramic imaging, guided diagnostics, and laser-ready workflows for cleaner treatment decisions.",
+  },
+  {
+    title: "Family-First Flow",
+    description: "A calmer branch experience shaped for children, adults, follow-ups, and everyday dentistry.",
+  },
+  {
+    title: "Fast Coordination",
+    description: "Consultations, treatment planning, and support requests handled from one connected branch touchpoint.",
+  },
+];
+
+const dhabejiHeroMetrics: ClinicHeroMetric[] = [
+  { label: "Clinic Hours", value: "Mon - Sat | 9:00 AM - 8:00 PM" },
+  { label: "Key Strength", value: "Laser care, aligners, veneers" },
+  { label: "Experience", value: "Comfort-first branch dentistry" },
+];
+
+const dhabejiHeroSlides: ClinicHeroSlide[] = [
+  {
+    id: "dhabeji-branch",
+    image: dhabejiPage.heroImage,
+    alt: "Dhabeji clinic interior with modern treatment setup",
+    eyebrow: "Branch Interior",
+    title: "A refined clinical environment for everyday care",
+    description:
+      "Bright operatories and a polished branch atmosphere support routine appointments, diagnostics, and restorative visits.",
+  },
+  {
+    id: "dhabeji-diagnostics",
+    image: hadeedServiceMedia.rootCanal.image,
+    alt: "Clinical environment supporting diagnostics and dental treatment planning",
+    eyebrow: "Diagnostics",
+    title: "Technology-backed treatment planning",
+    description:
+      "Care starts with clearer imaging, calmer consultations, and step-by-step planning that patients can actually follow.",
+  },
+  {
+    id: "dhabeji-specialist",
+    image: dhabejiPage.doctors[1].image,
+    alt: "Specialist-led care at the Dhabeji branch",
+    eyebrow: "Specialist Access",
+    title: "Experienced practitioners on branch duty",
+    description:
+      "Specialists and skilled dentists help patients move from first assessment to confident next-step treatment.",
+    objectPosition: "center top",
+  },
+];
+
+const hadeedHeroHighlights: ClinicHeroHighlight[] = [
+  {
+    title: "Digital Imaging",
+    description: "Sharper diagnostics give the branch a stronger foundation for consultations and restorative mapping.",
+  },
+  {
+    title: "Consultant Review",
+    description: "Specialist-led surgical and restorative planning keeps complex care clearer and more predictable.",
+  },
+  {
+    title: "Premium Patient Flow",
+    description: "A calmer, more polished visit experience from first conversation through follow-up guidance.",
+  },
+];
+
+const hadeedHeroMetrics: ClinicHeroMetric[] = [
+  { label: "Appointment Window", value: "Mon - Sat | 11:00 AM - 10:00 PM" },
+  { label: "Branch Location", value: "Gulshan-e-Hadeed, Karachi" },
+  { label: "Treatment Focus", value: "Diagnostics to smile enhancement" },
+];
+
+const hadeedHeroSlides: ClinicHeroSlide[] = [
+  {
+    id: "hadeed-exterior",
+    image: hadeedPage.heroImage,
+    alt: "The Dental Zone Hadeed branch exterior",
+    eyebrow: "Flagship Branch",
+    title: "A premium branch built around trust and clarity",
+    description:
+      "The flagship Hadeed experience blends modern presentation, specialist access, and a strong first impression for new patients.",
+  },
+  {
+    id: "hadeed-room",
+    image: hadeedPage.roomImage,
+    alt: "Modern Hadeed treatment room",
+    eyebrow: "Treatment Space",
+    title: "Calm interiors that support smoother appointments",
+    description:
+      "Purposeful treatment rooms help consultations, diagnostics, and procedure visits feel more structured and reassuring.",
+  },
+  {
+    id: "hadeed-restorative",
+    image: hadeedServiceMedia.crownBridges.image,
+    alt: "Restorative dentistry environment representing advanced care at Hadeed",
+    eyebrow: "Restorative Planning",
+    title: "Specialist-led care for complex restorative journeys",
+    description:
+      "From smile rehabilitation to advanced treatment planning, the branch is designed for cases that need clarity and confidence.",
+  },
+];
+
 const clinicPageConfigs: Record<
   ClinicSlug,
   {
@@ -411,50 +496,17 @@ export default async function ClinicPage({ params }: ClinicPageProps) {
 function DhabejiClinicPage() {
   return (
     <div className="pb-20 sm:pb-24">
-      <section className="relative overflow-hidden px-4 pb-8 pt-8 sm:px-6 sm:pt-10 lg:px-10">
-        <div className="absolute inset-x-0 top-0 -z-10 h-[38rem] bg-[radial-gradient(circle_at_top_left,rgba(204,229,255,0.45),transparent_26%),linear-gradient(180deg,#f8fafc_0%,#eef2f6_100%)]" />
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
-            <div className="space-y-8 lg:col-span-6">
-              <div className="flex items-center gap-3 text-[0.7rem] font-extrabold uppercase tracking-[0.26em] text-[#003857]">
-                <span className="h-px w-9 bg-[#003857]" />
-                Branch Specialty
-              </div>
-              <div>
-                <h1 className="font-heading text-4xl font-extrabold leading-[0.95] tracking-[-0.07em] text-[#003857] sm:text-6xl lg:text-7xl">
-                  Dental Clinic
-                  <br />
-                  <span className="text-[#1b4f72]">Dhabeji</span>
-                </h1>
-                <p className="mt-5 max-w-xl text-base leading-7 text-[#5b6672] sm:mt-6 sm:text-lg sm:leading-9">
-                  {dhabejiPage.intro}
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-4">
-                {dhabejiPage.featureBadges.map((item) => (
-                  <FeatureBadge key={item.title} {...item} />
-                ))}
-              </div>
-            </div>
-
-            <div className="relative lg:col-span-6">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-[0_30px_80px_rgba(15,23,42,0.16)]">
-                <Image
-                  src={dhabejiPage.heroImage}
-                  alt="Dhabeji Dental interior"
-                  fill
-                  preload
-                  sizes="(min-width: 1024px) 42vw, 100vw"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,56,87,0.24))]" />
-              </div>
-              <div className="absolute bottom-8 left-[-0.65rem] top-8 hidden w-1 rounded-full bg-[#1b4f72] lg:block" />
-            </div>
-          </div>
-        </div>
-      </section>
+      <ClinicHeroSlider
+        badge="Branch Specialty"
+        title="Dental Clinic"
+        accent="Dhabeji"
+        description={dhabejiPage.intro}
+        slides={dhabejiHeroSlides}
+        highlights={dhabejiHeroHighlights}
+        metrics={dhabejiHeroMetrics}
+        primaryAction={{ href: "/contact", label: "Book a Visit" }}
+        secondaryAction={{ href: "/clinics", label: "Explore Clinics" }}
+      />
 
       <section className="px-4 py-6 sm:px-6 sm:py-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-3">
@@ -615,75 +667,17 @@ function DhabejiClinicPage() {
 function HadeedClinicPage() {
   return (
     <div className="pb-20 sm:pb-24">
-      <section className="relative overflow-hidden px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-12 lg:px-10">
-        <div className="absolute inset-x-0 top-0 -z-10 h-[44rem] bg-[radial-gradient(circle_at_top_left,rgba(134,242,228,0.22),transparent_24%),linear-gradient(180deg,#f7fafb_0%,#eef4f7_100%)]" />
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
-            <div>
-              <span className="inline-flex rounded-full bg-[#006a61]/10 px-4 py-2 text-[0.7rem] font-extrabold uppercase tracking-[0.28em] text-[#006a61]">
-                Flagship Branch
-              </span>
-              <h1 className="mt-6 font-heading text-4xl font-extrabold leading-[0.96] tracking-[-0.07em] text-[#003857] sm:text-6xl lg:text-7xl">
-                The Dental Zone
-                <br />
-                <span className="text-[#006a61]">Hadeed</span>
-              </h1>
-              <p className="mt-6 max-w-xl text-base leading-7 text-[#5e6873] sm:mt-7 sm:text-lg sm:leading-9">
-                Premium dentistry anchored in trust, clarity, and comfort for Gulshan-e-Hadeed,
-                with specialist-led treatment, restorative planning, and a polished patient
-                journey.
-              </p>
-
-              <div className="mt-10 grid gap-4 sm:grid-cols-3">
-                {hadeedPage.highlights.map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-[1.4rem] border border-white/80 bg-white/90 p-4 text-sm font-medium text-[#003857] shadow-[0_12px_30px_rgba(15,23,42,0.05)]"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="grid gap-5 lg:grid-cols-[1.12fr_0.88fr]">
-              <div className="relative min-h-[22rem] overflow-hidden rounded-[1.5rem] shadow-[0_24px_70px_rgba(15,23,42,0.12)] sm:min-h-[30rem] sm:rounded-[2rem]">
-                <Image
-                  src={hadeedPage.heroImage}
-                  alt="Hadeed clinic exterior"
-                  fill
-                  preload
-                  sizes="(min-width: 1024px) 34vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="grid gap-5">
-                <div className="relative min-h-[12rem] overflow-hidden rounded-[1.5rem] bg-white shadow-[0_20px_50px_rgba(15,23,42,0.06)] sm:min-h-[14rem] sm:rounded-[2rem]">
-                  <Image
-                    src={hadeedPage.roomImage}
-                    alt="Hadeed treatment room"
-                    fill
-                    sizes="(min-width: 1024px) 18vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="rounded-[1.5rem] bg-[#003857] p-6 text-white shadow-[0_20px_50px_rgba(0,56,87,0.18)] sm:rounded-[2rem] sm:p-7">
-                  <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.28em] text-white/64">
-                    Appointment Window
-                  </p>
-                  <p className="mt-4 text-2xl font-bold tracking-[-0.04em] sm:mt-5 sm:text-3xl">
-                    Mon - Sat
-                  </p>
-                  <p className="mt-2 text-white/82">11:00 AM to 10:00 PM</p>
-                  <p className="mt-5 text-sm leading-7 text-[#cce5ff]">
-                    Iftikhar Memorial Hospital, Gulshan-e-Hadeed Phase 2, Karachi
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ClinicHeroSlider
+        badge="Flagship Branch"
+        title="The Dental Zone"
+        accent="Hadeed"
+        description="Premium dentistry anchored in trust, clarity, and comfort for Gulshan-e-Hadeed, with specialist-led treatment, restorative planning, and a polished patient journey."
+        slides={hadeedHeroSlides}
+        highlights={hadeedHeroHighlights}
+        metrics={hadeedHeroMetrics}
+        primaryAction={{ href: "/contact", label: "Book Appointment" }}
+        secondaryAction={{ href: "/contact", label: "Request Treatment Plan" }}
+      />
 
       <section className="px-4 py-10 sm:px-6 sm:py-12 lg:px-10">
         <div className="mx-auto max-w-7xl">
@@ -694,18 +688,18 @@ function HadeedClinicPage() {
             <h2 className="mt-4 font-heading text-2xl font-extrabold tracking-[-0.04em] text-[#003857] sm:text-4xl">
               Specialist care across diagnostics, restorative treatment, and smile enhancement.
             </h2>
-            <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-8 grid grid-cols-2 items-stretch gap-4 sm:gap-5 lg:grid-cols-4">
               {hadeedServiceCards.map((service) => (
                 <article
                   key={service.id}
-                  className="group overflow-hidden rounded-[1.6rem] border border-[#dbe3e7] shadow-[0_14px_40px_rgba(15,23,42,0.04)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(15,23,42,0.08)]"
+                  className="group flex h-full min-w-0 flex-col overflow-hidden rounded-[1.6rem] border border-[#dbe3e7] shadow-[0_14px_40px_rgba(15,23,42,0.04)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(15,23,42,0.08)]"
                 >
                   <div className="relative h-48 overflow-hidden">
                     <Image
                       src={service.image}
                       alt={service.alt}
                       fill
-                      sizes="(min-width: 1280px) 22vw, (min-width: 768px) 42vw, 100vw"
+                      sizes="(min-width: 1024px) 23vw, 50vw"
                       className="object-cover transition duration-700 group-hover:scale-105"
                       style={
                         service.objectPosition
@@ -719,12 +713,12 @@ function HadeedClinicPage() {
                     </div>
                   </div>
 
-                  <div className="p-5">
-                    <h3 className="text-lg font-bold tracking-[-0.03em] text-[#003857]">
+                  <div className="flex h-full min-w-0 flex-col p-4 sm:p-5">
+                    <h3 className="break-words text-base font-bold tracking-[-0.03em] text-[#003857] sm:text-lg">
                       {service.title}
                     </h3>
-                    <p className="mt-3 text-sm leading-7 text-[#67727e]">{service.description}</p>
-                    <p className="mt-4 rounded-[1.1rem] bg-[#eef4f7] px-4 py-3 text-sm leading-6 text-[#003857]/80">
+                    <p className="mt-3 break-words text-sm leading-6 text-[#67727e] sm:leading-7">{service.description}</p>
+                    <p className="mt-auto pt-4 rounded-[1.1rem] bg-[#eef4f7] px-4 py-3 text-sm leading-6 text-[#003857]/80">
                       {service.benefit}
                     </p>
                   </div>
@@ -785,20 +779,6 @@ function HadeedClinicPage() {
           </div>
         </div>
       </section>
-    </div>
-  );
-}
-
-function FeatureBadge({ title, subtitle, icon: Icon }: FeatureBadgeItem) {
-  return (
-    <div className="flex items-center gap-3 rounded-full bg-white px-5 py-4 shadow-[0_12px_28px_rgba(15,23,42,0.04)]">
-      <div className="grid h-10 w-10 place-items-center rounded-full bg-[#eef4f8] text-[#003857]">
-        <Icon className="h-6 w-6" />
-      </div>
-      <div>
-        <p className="text-sm font-bold text-[#003857]">{title}</p>
-        <p className="text-xs text-[#6b7480]">{subtitle}</p>
-      </div>
     </div>
   );
 }
@@ -935,35 +915,6 @@ function SupportIcon({ className }: IconProps) {
       <rect x="4" y="11" width="3.5" height="6" rx="1.75" fill="currentColor" />
       <rect x="16.5" y="11" width="3.5" height="6" rx="1.75" fill="currentColor" />
       <path d="M10 18h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function TechIcon({ className }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      <path
-        d="M12 4v4M12 16v4M4 12h4M16 12h4"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <circle cx="12" cy="12" r="4.2" stroke="currentColor" strokeWidth="2" />
-    </svg>
-  );
-}
-
-function ShieldIcon({ className }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      <path d="M12 4 5.5 6.3V11c0 4 2.7 7.5 6.5 9 3.8-1.5 6.5-5 6.5-9V6.3L12 4Z" fill="currentColor" />
-      <path
-        d="m9.3 12.2 1.8 1.8 3.6-4"
-        stroke="white"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
     </svg>
   );
 }

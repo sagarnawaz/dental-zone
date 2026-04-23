@@ -5,8 +5,8 @@ import Link from "next/link";
 import { appointmentHref, callHref, founder, siteName, whyChooseUs } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "About Us | Zia Dental Care",
-  description: "Learn about the founder vision, treatment philosophy, and modern patient-focused approach at Zia Dental Care.",
+  title: "About Us | The Dental Zone",
+  description: "Learn about the founder vision, treatment philosophy, and modern patient-focused approach at The Dental Zone.",
 };
 
 export default function AboutPage() {
@@ -32,7 +32,15 @@ export default function AboutPage() {
         </div>
 
         <div className="relative overflow-hidden rounded-[2rem] shadow-[0_28px_80px_rgba(15,23,42,0.12)]">
-          <Image src={founder.image} alt={founder.name} width={1000} height={1080} className="h-[28rem] w-full object-cover sm:h-[38rem]" />
+          <Image
+            src={founder.image}
+            alt={founder.name}
+            width={1000}
+            height={1080}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="h-[28rem] w-full object-cover sm:h-[38rem]"
+            preload
+          />
         </div>
       </section>
 

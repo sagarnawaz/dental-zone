@@ -1,14 +1,19 @@
 import Card from "@/components/ui/Card";
-import type { Testimonial } from "@/data/site";
+
+type Testimonial = {
+  author: string;
+  rating: number;
+  text: string;
+};
 
 export default function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <Card className="flex h-full flex-col gap-5 p-6">
-      <div className="text-4xl leading-none text-[var(--color-accent)]">“</div>
-      <p className="text-base leading-8 text-[var(--color-text)]/82">{testimonial.quote}</p>
+    <Card className="flex h-full flex-col gap-4 p-4 sm:gap-5 sm:p-6">
+      <div className="text-4xl leading-none text-[var(--color-accent)]">&ldquo;</div>
+      <p className="break-words text-sm leading-7 text-[var(--color-text)]/82 sm:text-base sm:leading-8">{testimonial.text}</p>
       <div className="mt-auto border-t border-[var(--border-soft)] pt-4">
-        <p className="font-semibold text-[var(--color-primary)]">{testimonial.author}</p>
-        <p className="mt-1 text-sm text-[var(--color-text-soft)]">{testimonial.context}</p>
+        <p className="break-words font-semibold text-[var(--color-primary)]">{testimonial.author}</p>
+        <p className="mt-1 text-sm text-[var(--color-text-soft)]">{`${testimonial.rating}/5 Google review`}</p>
       </div>
     </Card>
   );

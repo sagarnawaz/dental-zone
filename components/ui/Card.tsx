@@ -6,5 +6,5 @@ type CardProps = {
 };
 
 export default function Card({ children, className }: CardProps) {
-  return <div className={cn("card-surface", className)}>{children}</div>;
+  return <div className={cn("card-surface min-w-0", className)}>{children}</div>;
 }

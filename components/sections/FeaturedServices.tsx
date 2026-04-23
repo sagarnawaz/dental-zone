@@ -11,9 +11,9 @@ export default function FeaturedServices() {
           title="Advanced dental care presented with clarity, polish, and patient confidence."
           description="Every service is positioned to feel premium yet approachable, with strong treatment hierarchy and clear next steps for appointments."
         />
-        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 items-stretch gap-4 sm:gap-5 lg:grid-cols-4">
           {services.map((service) => (
-            <ServiceCard key={service.id} service={service} />
+            <ServiceCard key={service.slug} service={service} />
           ))}
         </div>
       </div>

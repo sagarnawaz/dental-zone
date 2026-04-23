@@ -1,9 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import ReviewSlider from "@/components/sections/ReviewSlider";
-import TeamSlider from "@/components/sections/TeamSlider";
+import ClinicHeroSlider, {
+  type ClinicHeroSlide,
+} from "@/components/sections/ClinicHeroSlider";
+import ClientReviewVideo from "@/components/sections/ClientReviewVideo";
+import LazyReviewSlider from "@/components/sections/LazyReviewSlider";
+import LazyTeamSlider from "@/components/sections/LazyTeamSlider";
 import FaqAccordion from "@/components/ui/FaqAccordion";
+import Card from "@/components/ui/Card";
 import {
   appointmentHref,
   callHref,
@@ -19,130 +24,151 @@ import {
   whyChooseUs,
 } from "@/data/site";
 
+const homeHeroSlides: ClinicHeroSlide[] = [
+  {
+    id: "home-founder",
+    image: founder.image,
+    alt: founder.name,
+    eyebrow: "Founder Vision",
+    title: "A calm, modern dental brand with sharper digital clarity",
+    description:
+      "Built around patient trust, structured care journeys, and a cleaner presentation across clinics, services, and mentoring.",
+    objectPosition: "center top",
+  },
+  {
+    id: "home-services",
+    image: services[0].image,
+    alt: services[0].name,
+    eyebrow: "Service Detail",
+    title: "Service discovery that moves patients toward real decisions",
+    description:
+      "From consultation to restorative treatment, the experience is designed to feel polished, direct, and easy to act on.",
+  },
+  {
+    id: "home-review",
+    image: videoReview.poster,
+    alt: videoReview.title,
+    eyebrow: "Patient Trust",
+    title: "Testimonials, reviews, and clinic proof placed where they matter",
+    description:
+      "The homepage now opens with a stronger trust-first story before patients ever scroll into services or booking sections.",
+  },
+];
+
 export default function HomePage() {
   return (
-    <div className="px-4 pb-10 sm:px-6 lg:px-10">
-      <section className="section-fade pt-6 sm:pt-10">
-        <div className="hero-shell mx-auto max-w-7xl overflow-hidden rounded-[2rem] px-6 py-10 sm:px-10 sm:py-14 lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-10 lg:px-14 lg:py-18">
-          <div>
-            <span className="inline-flex rounded-full bg-[var(--color-highlight)] px-4 py-2 text-[0.7rem] font-bold uppercase tracking-[0.24em] text-[var(--color-secondary)]">
-              Founder Introduction
-            </span>
-            <h1 className="mt-6 max-w-2xl font-heading text-4xl font-extrabold leading-[0.95] tracking-[-0.07em] text-[var(--color-primary)] sm:text-6xl lg:text-7xl">
-              Modern Dentistry
-              <br />
-              with a calm,
-              <br />
-              structured feel.
-            </h1>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-[var(--color-text-soft)] sm:text-lg sm:leading-9">
-              {founder.intro}
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Link
-                href={appointmentHref}
-                className="inline-flex items-center justify-center rounded-full bg-[var(--color-primary)] px-7 py-4 text-sm font-bold text-white shadow-[0_18px_40px_rgba(0,56,87,0.22)] transition duration-300 hover:-translate-y-0.5"
-              >
-                Add Appointment
-              </Link>
-              <a
-                href={callHref}
-                className="inline-flex items-center justify-center rounded-full border border-[var(--border-strong)] bg-white px-7 py-4 text-sm font-semibold text-[var(--color-primary)] transition duration-300 hover:-translate-y-0.5"
-              >
-                Call Now
-              </a>
-            </div>
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
-              {founder.stats.map((stat) => (
-                <div key={stat.label} className="card-surface p-5">
-                  <p className="text-3xl font-extrabold tracking-[-0.04em] text-[var(--color-primary)]">
-                    {stat.value}
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-[var(--color-text-soft)]">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+    <>
+      <ClinicHeroSlider
+        badge="Founder Introduction"
+        title="Modern Dentistry"
+        accent="With Structured Clarity"
+        description={founder.intro}
+        slides={homeHeroSlides}
+        primaryAction={{ href: appointmentHref, label: "Add Appointment" }}
+        secondaryAction={{ href: "/clinics", label: "Explore Clinics" }}
+        layout="minimal"
+      />
 
-          <div className="mt-10 lg:mt-0">
-            <div className="relative mx-auto max-w-xl">
-              <div className="float-card absolute -left-4 top-8 hidden rounded-[1.4rem] bg-white px-5 py-4 shadow-[0_16px_40px_rgba(15,23,42,0.08)] md:block">
-                <p className="text-sm font-bold text-[var(--color-primary)]">{founder.name}</p>
-                <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-soft)]">
+      <div className="px-4 pb-10 sm:px-6 lg:px-10">
+        <section className="section-fade mx-auto mt-16 max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+            <div className="max-w-2xl">
+              <p className="section-eyebrow">Founder Intro</p>
+              <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-[-0.05em] text-[var(--color-primary)] sm:text-5xl">
+                Meet the founder behind The Dental Zone
+              </h2>
+              <p className="mt-5 text-base leading-8 text-[var(--color-text-soft)] sm:text-lg sm:leading-9">
+                {founder.intro}
+              </p>
+              <div className="mt-6">
+                <p className="text-lg font-bold tracking-[-0.03em] text-[var(--color-primary)]">
+                  {founder.name}
+                </p>
+                <p className="mt-1 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-text-soft)]">
                   {founder.title}
                 </p>
               </div>
-              <div className="relative overflow-hidden rounded-[2rem] bg-white shadow-[0_28px_80px_rgba(15,23,42,0.12)]">
-                <Image
-                  src={founder.image}
-                  alt={founder.name}
-                  width={900}
-                  height={980}
-                  priority
-                  className="h-[28rem] w-full object-cover sm:h-[36rem]"
-                />
-              </div>
+            </div>
+
+            <div className="relative overflow-hidden rounded-[1.8rem] shadow-[0_24px_70px_rgba(15,23,42,0.1)]">
+              <Image
+                src="/founder.jpeg"
+                alt={founder.name}
+                width={1200}
+                height={1400}
+                sizes="(min-width: 1024px) 48vw, 100vw"
+                className="h-[24rem] w-full object-cover object-top sm:h-[30rem] lg:h-[34rem]"
+              />
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="section-fade mx-auto mt-20 max-w-7xl">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="section-eyebrow">All Services</p>
-            <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-[-0.05em] text-[var(--color-primary)] sm:text-5xl">
-              Services with clear detail pages
-            </h2>
+        <section className="section-fade mx-auto mt-20 max-w-7xl">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="section-eyebrow">All Services</p>
+              <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-[-0.05em] text-[var(--color-primary)] sm:text-5xl">
+                Services with clear detail pages
+              </h2>
+            </div>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Link href={appointmentHref} className="rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-bold text-white">
-              Add Appointment
-            </Link>
-            <a href={callHref} className="rounded-full border border-[var(--border-soft)] bg-white px-6 py-3 text-sm font-semibold text-[var(--color-primary)]">
-              Call Now
-            </a>
-          </div>
-        </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {services.map((service) => (
-            <article key={service.slug} className="card-surface overflow-hidden">
-              <div className="relative h-56">
-                <Image src={service.image} alt={service.name} fill className="object-cover" sizes="(min-width: 1280px) 22vw, (min-width: 768px) 46vw, 100vw" />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,56,87,0.6))]" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-extrabold tracking-[-0.04em] text-[var(--color-primary)]">
-                  {service.name}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">
-                  {service.shortDescription}
-                </p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {service.highlights.map((highlight) => (
-                    <span
-                      key={highlight}
-                      className="rounded-full bg-[#edf3f6] px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]"
-                    >
-                      {highlight}
-                    </span>
-                  ))}
+          <div className="mt-10 grid grid-cols-2 items-stretch gap-4 sm:gap-5 lg:grid-cols-4">
+            {services.map((service, index) => (
+              <Card
+                key={service.slug}
+                className="group flex h-full flex-col overflow-hidden rounded-[1.6rem] border border-[#e5ebef] bg-white/92 p-0 shadow-[0_12px_34px_rgba(15,23,42,0.045)] hover:-translate-y-1 hover:border-[#d8e2e9] hover:shadow-[0_18px_44px_rgba(15,23,42,0.07)]"
+              >
+                <div className="relative h-44 overflow-hidden">
+                  <Image
+                    src={service.image}
+                    alt={service.name}
+                    fill
+                    className="object-cover transition duration-700 group-hover:scale-[1.03]"
+                    sizes="(min-width: 1024px) 23vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,32,51,0.03),rgba(5,32,51,0.24))]" />
+                  <div className="absolute left-4 top-4 inline-flex rounded-full border border-white/50 bg-white/88 px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.2em] text-[var(--color-primary)] backdrop-blur-sm">
+                    Service {String(index + 1).padStart(2, "0")}
+                  </div>
                 </div>
-                <Link
-                  href={`/services/${service.slug}`}
-                  className="mt-6 inline-flex items-center text-sm font-bold text-[var(--color-secondary)] transition duration-300 hover:translate-x-1"
-                >
-                  View detail page
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+                <div className="flex h-full min-w-0 flex-col p-4 sm:p-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <h3 className="min-w-0 flex-1 break-words text-lg font-bold tracking-[-0.04em] text-[var(--color-primary)] sm:text-xl">
+                      {service.name}
+                    </h3>
+                    <span className="shrink-0 rounded-full bg-[var(--color-highlight)] px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.18em] text-[var(--color-secondary)]">
+                      Featured
+                    </span>
+                  </div>
+                  <p className="mt-3 break-words text-sm leading-6 text-[var(--color-text-soft)] sm:leading-7">
+                    {service.shortDescription}
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {service.highlights.slice(0, 2).map((highlight) => (
+                      <span
+                        key={highlight}
+                        className="rounded-full border border-[#dbe5eb] bg-[#f8fbfc] px-3 py-1.5 text-[0.68rem] font-semibold tracking-[0.02em] text-[var(--color-primary)]"
+                      >
+                        {highlight}
+                      </span>
+                    ))}
+                  </div>
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-bold text-[var(--color-primary)] transition duration-300 hover:gap-3"
+                  >
+                    View detail
+                    <ArrowUpRightIcon />
+                  </Link>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </section>
 
       <section className="section-fade mx-auto mt-20 max-w-7xl">
-        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div className="grid gap-10 lg:grid-cols-[1.12fr_0.88fr] lg:items-center">
           <div>
             <p className="section-eyebrow">Client Review</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-[-0.05em] text-[var(--color-primary)] sm:text-5xl">
@@ -161,36 +187,8 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="card-surface overflow-hidden p-4">
-            <div className="relative h-[22rem] overflow-hidden rounded-[1.6rem]">
-              <Image
-                src={videoReview.poster}
-                alt={videoReview.title}
-                fill
-                className="object-cover"
-                sizes="(min-width: 1024px) 40vw, 100vw"
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.1),rgba(0,56,87,0.72))]" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 text-center text-white">
-                <span className="grid size-20 place-items-center rounded-full bg-white/16 backdrop-blur">
-                  <PlayIcon />
-                </span>
-                <div className="max-w-sm">
-                  <p className="text-2xl font-extrabold tracking-[-0.04em]">{videoReview.title}</p>
-                  <p className="mt-2 text-sm leading-7 text-white/84">
-                    Patient testimonial display block with strong visual emphasis and direct CTA below.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <Link href={appointmentHref} className="rounded-full bg-white px-5 py-3 text-sm font-bold text-[var(--color-primary)]">
-                    Add Appointment
-                  </Link>
-                  <a href={callHref} className="rounded-full border border-white/25 px-5 py-3 text-sm font-semibold text-white">
-                    Call Now
-                  </a>
-                </div>
-              </div>
-            </div>
+          <div className="flex justify-center">
+            <ClientReviewVideo title={videoReview.title} />
           </div>
         </div>
       </section>
@@ -203,72 +201,84 @@ export default function HomePage() {
               Team members in a clean slider
             </h2>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Link href={appointmentHref} className="rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-bold text-white">
-              Add Appointment
-            </Link>
-            <a href={callHref} className="rounded-full border border-[var(--border-soft)] bg-white px-6 py-3 text-sm font-semibold text-[var(--color-primary)]">
-              Call Now
-            </a>
-          </div>
         </div>
         <div className="mt-10">
-          <TeamSlider members={teamMembers} />
+          <LazyTeamSlider members={teamMembers} />
         </div>
       </section>
 
       <section className="section-fade mx-auto mt-20 max-w-7xl">
-        <ReviewSlider title="Google Reviews" reviews={googleReviews} />
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Link href={appointmentHref} className="rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-bold text-white">
-            Add Appointment
-          </Link>
-          <a href={callHref} className="rounded-full border border-[var(--border-soft)] bg-white px-6 py-3 text-sm font-semibold text-[var(--color-primary)]">
-            Call Now
-          </a>
-        </div>
+        <LazyReviewSlider
+          title="Read What Our Patients Say- Real Stories, Real Smiles"
+          reviews={googleReviews}
+        />
       </section>
 
       <section className="section-fade mx-auto mt-20 max-w-7xl">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
+        <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+          <div className="max-w-2xl">
             <p className="section-eyebrow">Why Choose Us</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-[-0.05em] text-[var(--color-primary)] sm:text-5xl">
-              Trusted reasons patients choose us
+              Trusted care with a calmer, more modern treatment experience
             </h2>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Link href={appointmentHref} className="rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-bold text-white">
-              Add Appointment
-            </Link>
-            <a href={callHref} className="rounded-full border border-[var(--border-soft)] bg-white px-6 py-3 text-sm font-semibold text-[var(--color-primary)]">
-              Call Now
-            </a>
-          </div>
-        </div>
+            <p className="mt-5 text-base leading-8 text-[var(--color-text-soft)]">
+              We keep the experience simple for patients: gentle treatment, updated technology, and a team that explains
+              every step clearly before starting.
+            </p>
+            <p className="mt-4 text-base leading-8 text-[var(--color-text-soft)]">
+              From pain-managed dentistry and laser procedures to sedation support and aesthetic care, each service is
+              designed to feel more comfortable, more precise, and easier to trust.
+            </p>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {whyChooseUs.map((item) => (
-            <article key={item.title} className="card-surface p-6">
-              <div className="grid size-12 place-items-center rounded-2xl bg-[var(--color-highlight)] text-[var(--color-secondary)]">
-                <CheckIcon />
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+              <div className="rounded-[1.2rem] border border-[#d9e5ea] bg-white/80 px-4 py-4">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#5f7a83]">Patient-first</p>
+                <p className="mt-2 text-sm font-semibold text-[var(--color-primary)]">Clear guidance before treatment</p>
               </div>
-              <h3 className="mt-5 text-2xl font-extrabold tracking-[-0.04em] text-[var(--color-primary)]">
-                {item.title}
-              </h3>
-              <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{item.description}</p>
-            </article>
-          ))}
+              <div className="rounded-[1.2rem] border border-[#d9e5ea] bg-white/80 px-4 py-4">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#5f7a83]">Technology</p>
+                <p className="mt-2 text-sm font-semibold text-[var(--color-primary)]">Modern tools with precise care</p>
+              </div>
+              <div className="rounded-[1.2rem] border border-[#d9e5ea] bg-white/80 px-4 py-4">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#5f7a83]">Comfort</p>
+                <p className="mt-2 text-sm font-semibold text-[var(--color-primary)]">Pain-aware and sedation-ready</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            {whyChooseUs.map((item) => (
+              <article
+                key={item.title}
+                className="rounded-[1.35rem] border border-[#dbe6eb] bg-white/88 p-4 shadow-[0_10px_26px_rgba(15,23,42,0.04)]"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-[#eef7f8] text-[var(--color-secondary)]">
+                    <CheckIcon />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-extrabold tracking-[-0.03em] text-[var(--color-primary)]">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-[var(--color-text-soft)]">{item.description}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="section-fade mx-auto mt-20 max-w-7xl">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="card-surface p-6 sm:p-8">
+        <div className="grid gap-6 lg:grid-cols-[0.94fr_1.06fr]">
+          <div className="card-surface flex h-full flex-col p-6 sm:p-8">
             <p className="section-eyebrow">{locationInfo.title}</p>
             <h2 className="mt-3 text-3xl font-extrabold tracking-[-0.05em] text-[var(--color-primary)]">
               Clinic timings
             </h2>
+            <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--color-text-soft)]">
+              Visit during the hours below or call ahead for quick guidance before you arrive at the clinic.
+            </p>
             <div className="mt-8 space-y-3">
               {weeklyHours.map((item) => (
                 <div
@@ -293,12 +303,12 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="card-surface overflow-hidden p-4">
-            <div className="overflow-hidden rounded-[1.6rem]">
+          <div className="card-surface h-full overflow-hidden p-3 sm:p-4">
+            <div className="h-full min-h-[24rem] overflow-hidden rounded-[1.6rem] sm:min-h-[28rem]">
               <iframe
                 title="Dhabeji Clinic map"
                 src={locationInfo.mapEmbed}
-                className="h-[34rem] w-full border-0"
+                className="h-full w-full border-0"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
@@ -308,36 +318,22 @@ export default function HomePage() {
       </section>
 
       <section className="section-fade mx-auto mt-20 max-w-7xl">
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <p className="section-eyebrow">FAQ</p>
-            <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-[-0.05em] text-[var(--color-primary)] sm:text-5xl">
-              Frequently asked questions
-            </h2>
-            <p className="mt-5 text-base leading-8 text-[var(--color-text-soft)]">
-              If you need quick help before booking, call us directly on {primaryPhone}.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href={appointmentHref} className="rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-bold text-white">
-                Add Appointment
-              </Link>
-              <a href={callHref} className="rounded-full border border-[var(--border-soft)] bg-white px-6 py-3 text-sm font-semibold text-[var(--color-primary)]">
-                Call Now
-              </a>
-            </div>
-          </div>
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="section-eyebrow">FAQ</p>
+          <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-[-0.05em] text-[var(--color-primary)] sm:text-5xl">
+            Frequently asked questions
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[var(--color-text-soft)]">
+            If you need quick help before booking, call us directly on {primaryPhone}. Tap any question below to view the answer.
+          </p>
+        </div>
+
+        <div className="mx-auto mt-10 max-w-4xl">
           <FaqAccordion items={faqItems} />
         </div>
       </section>
-    </div>
-  );
-}
-
-function PlayIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className="size-8" aria-hidden="true">
-      <path d="m9 7 8 5-8 5V7Z" fill="currentColor" />
-    </svg>
+      </div>
+    </>
   );
 }
 
@@ -345,6 +341,15 @@ function CheckIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" className="size-6" aria-hidden="true">
       <path d="m6 12.5 4 4L18 8.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function ArrowUpRightIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="size-4" aria-hidden="true">
+      <path d="M7 17 17 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M9 7h8v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

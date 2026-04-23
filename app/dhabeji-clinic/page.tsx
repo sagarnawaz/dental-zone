@@ -5,7 +5,7 @@ import Link from "next/link";
 import { appointmentHref, callHref, dhabejiClinicPage, locationInfo, services, weeklyHours } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Dhabeji Clinic | Zia Dental Care",
+  title: "Dhabeji Clinic | The Dental Zone",
   description: dhabejiClinicPage.description,
 };
 
@@ -40,7 +40,15 @@ export default function DhabejiClinicPage() {
         </div>
 
         <div className="relative overflow-hidden rounded-[2rem] shadow-[0_28px_80px_rgba(15,23,42,0.12)]">
-          <Image src={dhabejiClinicPage.heroImage} alt={dhabejiClinicPage.title} width={1200} height={1000} className="h-[28rem] w-full object-cover sm:h-[36rem]" />
+          <Image
+            src={dhabejiClinicPage.heroImage}
+            alt={dhabejiClinicPage.title}
+            width={1200}
+            height={1000}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="h-[28rem] w-full object-cover sm:h-[36rem]"
+            preload
+          />
         </div>
       </section>
 

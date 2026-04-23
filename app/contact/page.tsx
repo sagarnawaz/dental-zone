@@ -11,7 +11,7 @@ import {
 } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Zia Dental Care",
+  title: "Contact Us | The Dental Zone",
   description: "Book an appointment, call the clinic, or reach out for FCPS online training and Dhabeji clinic support.",
 };
 

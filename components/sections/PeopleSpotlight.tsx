@@ -13,7 +13,7 @@ export default function PeopleSpotlight() {
           title="A credible panel spanning clinical care and postgraduate mentorship."
           description="The site brings forward specialist credibility without overwhelming the visitor, helping both patients and trainees find the right expert quickly."
         />
-        <div className="mt-10 grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 items-stretch gap-4 sm:gap-5 lg:grid-cols-4">
           {featured.map((profile) => (
             <ProfileCard key={profile.id} profile={profile} />
           ))}

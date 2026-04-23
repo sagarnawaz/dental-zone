@@ -1,6 +1,6 @@
 import SectionHeading from "@/components/ui/SectionHeading";
 import TestimonialCard from "@/components/ui/TestimonialCard";
-import { testimonials } from "@/data/site";
+import { googleReviews } from "@/data/site";
 
 export default function TestimonialsSection() {
   return (
@@ -12,8 +12,8 @@ export default function TestimonialsSection() {
           description="Testimonials are positioned as trust markers across both clinic branches and the FCPS training pathway."
         />
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
-          {testimonials.slice(0, 3).map((testimonial) => (
-            <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+          {googleReviews.slice(0, 3).map((testimonial) => (
+            <TestimonialCard key={`${testimonial.author}-${testimonial.text}`} testimonial={testimonial} />
           ))}
         </div>
       </div>

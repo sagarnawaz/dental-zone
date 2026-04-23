@@ -1,4 +1,4 @@
-export const siteName = "Zia Dental Care";
+export const siteName = "The Dental Zone";
 
 export const primaryPhone = "+92-336-2130181";
 export const secondaryPhone = "+92-329-2377122";
@@ -9,7 +9,7 @@ export const appointmentHref = "/contact";
 export const navItems = [
   { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "Dhabeji Clinic", href: "/dhabeji-clinic" },
+  { label: "Dhabeji Clinic", href: "/clinics/dhabeji" },
   { label: "FCPS Online Training", href: "/fcps-training" },
   { label: "Contact Us", href: "/contact" },
 ] as const;
@@ -18,7 +18,7 @@ export const founder = {
   name: "Dr. Khubaib Ahmed Shaikh",
   title: "Founder & Lead Consultant",
   intro:
-    "Zia Dental Care is built on one simple promise: modern dentistry should feel clear, calm, and genuinely caring. From family dental care to advanced treatment planning and FCPS mentorship, every service is designed to give patients and trainees confidence in their next step.",
+    "The Dental Zone is built on one simple promise: modern dentistry should feel clear, calm, and genuinely caring. From family dental care to advanced treatment planning and FCPS mentorship, every service is designed to give patients and trainees confidence in their next step.",
   image:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuCLTm5DBMo6Y65bo1S9kVu_l-9NGkiv_dZ9oJi5lN_dmTj-CSb5q4EgRemlENx3UajQXY1myzEZ2C2CNxKOZkDqezcN6HvZF2OzWyG2GWo408Z5bnNE3YiXDQhpCZA7WBHaMp3sO6V_d64b2S47RDmjzTATJ-lpAVYclF5QsfKPeQVsMzbX8JqU3N8o4uj_0_IaEQD8yEGmEx1L_VdFFeUt3hTM2sxkVF90R4npumex3zAOR97tsNOlU8kj9ewJiCbCOqhQHiWjb8M",
   stats: [
@@ -290,12 +290,12 @@ export const faqItems: FaqItem[] = [
   {
     question: "1. Where can I find the best dentist in Karachi?",
     answer:
-      "While searching for the best dentist in Karachi, several things that should come into your mind include: qualifications of dentist, patient reviews, range of services and clinic’s overall reputation. A good dentist should have good working record of handling their patients, use updated dental equipment and should respect the patient’s needs. At Zia Dental Care, such standards are met with professional staff, up to date tools and equipment and personalized forms of treatment. We’re honored to be the preferred choice of many patients of Karachi who expect quality, safe treatment and caring environment.",
+      "While searching for the best dentist in Karachi, several things that should come into your mind include: qualifications of dentist, patient reviews, range of services and clinic’s overall reputation. A good dentist should have good working record of handling their patients, use updated dental equipment and should respect the patient’s needs. At The Dental Zone, such standards are met with professional staff, up to date tools and equipment and personalized forms of treatment. We’re honored to be the preferred choice of many patients of Karachi who expect quality, safe treatment and caring environment.",
   },
   {
-    question: "2. Which services are available at Zia Dental Care?",
+    question: "2. Which services are available at The Dental Zone?",
     answer:
-      "Zia Dental Care offers detail checkup and X-ray, scaling and polishing, surgical extraction, teeth whitening, root canal treatment, fillings, crowns and bridges, and extractions. Aesthetic and supportive care options are also highlighted through our modern treatment approach.",
+      "The Dental Zone offers detail checkup and X-ray, scaling and polishing, surgical extraction, teeth whitening, root canal treatment, fillings, crowns and bridges, and extractions. Aesthetic and supportive care options are also highlighted through our modern treatment approach.",
   },
   {
     question: "3. How do I choose the best dental clinic in Karachi?",
@@ -305,25 +305,25 @@ export const faqItems: FaqItem[] = [
   {
     question: "4. Are there any dental clinics near me that offers aesthetic dental services?",
     answer:
-      "Yes. Zia Dental Care offers aesthetic-focused services and a modern care environment for patients looking for cosmetic improvement along with routine and restorative dentistry.",
+      "Yes. The Dental Zone offers aesthetic-focused services and a modern care environment for patients looking for cosmetic improvement along with routine and restorative dentistry.",
   },
   {
-    question: "5. What makes Zia Dental Care the better clinic than other dental clinics?",
+    question: "5. What makes The Dental Zone the better clinic than other dental clinics?",
     answer:
       "Our clinic stands out through patient-focused care, modern techniques, laser-supported treatment options, experienced dentists, clean presentation, and clear communication before and after treatment.",
   },
   {
     question: "6. Where do I get a reliable dentist near me for my family’s dental health?",
     answer:
-      "A reliable family dentist should provide preventive, restorative, and consultation-based care in a calm environment. Zia Dental Care is designed to support children, adults, and families with convenient timings and dependable follow-up.",
+      "A reliable family dentist should provide preventive, restorative, and consultation-based care in a calm environment. The Dental Zone is designed to support children, adults, and families with convenient timings and dependable follow-up.",
   },
   {
-    question: "7. Is it possible to book an online video appointment at Zia Dental Care?",
+    question: "7. Is it possible to book an online video appointment at The Dental Zone?",
     answer:
       "Yes. You can contact our team through the contact page or call directly to request an online video appointment, depending on the concern and doctor availability.",
   },
   {
-    question: "8. Which options of payments does the Zia Dental Care accept?",
+    question: "8. Which options of payments does The Dental Zone accept?",
     answer:
       "For payment details, patients can call before their visit and our team will guide them through the currently accepted options and appointment process. This helps avoid confusion before treatment starts.",
   },
@@ -379,10 +379,10 @@ export type Clinic = {
 export const brands: Brand[] = [
   {
     id: "hadeed",
-    name: "Zia Dental Care Hadeed",
+    name: "The Dental Zone Hadeed",
     shortName: "Hadeed",
     category: "Flagship Clinic",
-    href: "/services",
+    href: "/clinics/hadeed",
     tagline: "Advanced family dentistry with modern clinical planning.",
     description: "A specialist-led experience for consultation, restorative care, and treatment planning.",
     accentLabel: "Premium Care",
@@ -394,7 +394,7 @@ export const brands: Brand[] = [
     name: "Dhabeji Clinic",
     shortName: "Dhabeji",
     category: "Community Clinic",
-    href: "/dhabeji-clinic",
+    href: "/clinics/dhabeji",
     tagline: "Accessible daily dentistry for families and routine patients.",
     description: "A clean modern branch focused on convenient routine, restorative, and follow-up care.",
     accentLabel: "Family Focus",
@@ -429,7 +429,7 @@ export const profiles: Profile[] = teamMembers.map((member, index) => ({
 export const clinics: Clinic[] = [
   {
     slug: "hadeed",
-    name: "Zia Dental Care Hadeed",
+    name: "The Dental Zone Hadeed",
     headline: "Modern specialist-led care for consultations and treatment planning.",
     tagline: "Flagship branch support",
     intro: "A polished environment for diagnostics, restorative care, and specialist discussion.",
@@ -476,3 +476,4 @@ export const contactChannels = [
   { label: primaryPhone, href: callHref },
   { label: secondaryPhone, href: `tel:${secondaryPhone.replace(/[^+\d]/g, "")}` },
 ];
+

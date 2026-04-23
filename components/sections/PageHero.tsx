@@ -7,7 +7,7 @@ type PageHeroProps = {
 
 export default function PageHero({ eyebrow, title, description, sideNote }: PageHeroProps) {
   return (
-    <section className="px-3 pt-6 sm:px-5">
+    <section className="-mt-[6.5rem] px-3 pt-[7.25rem] sm:-mt-[6.75rem] sm:px-5 sm:pt-[7.5rem]">
       <div className="page-hero-shell mx-auto max-w-[min(1380px,100%)] rounded-[2.25rem] px-6 py-10 sm:px-8 lg:px-10">
         <div className="grid gap-8 lg:grid-cols-[1fr_0.42fr] lg:items-end">
           <div>
