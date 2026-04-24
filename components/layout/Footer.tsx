@@ -23,40 +23,48 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="mt-20 border-t border-black/5 bg-[#f4f8fa] px-4 py-14 sm:px-6 lg:px-10">
+    <footer className="mt-20 border-t border-black/5 bg-[linear-gradient(180deg,#f4f8fa_0%,#eef4f7_100%)] px-4 py-14 sm:px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-10 lg:grid-cols-[1.3fr_0.9fr_0.9fr_1fr]">
-          <div className="space-y-5">
-            <div className="flex items-center gap-4">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:gap-x-10 lg:grid-cols-[1.45fr_0.85fr_0.95fr_1fr] lg:items-start">
+          <div className="col-span-2 space-y-6 text-left lg:col-span-1 xl:pr-8">
+            <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4">
               <Image
                 src="/logo-transparent.png"
                 alt={`${siteName} logo`}
                 width={625}
                 height={625}
-                className="h-20 w-20 object-contain sm:h-24 sm:w-24"
+                className="h-24 w-24 object-contain sm:h-28 sm:w-28 lg:h-32 lg:w-32"
               />
+              <div className="min-w-0">
+                <p className="font-heading text-2xl font-bold tracking-[-0.04em] text-[var(--color-primary)] sm:text-3xl">
+                  {siteName}
+                </p>
+                <p className="mt-1 text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[var(--color-text-soft)]">
+                  Modern Dental Care
+                </p>
+              </div>
             </div>
-            <p className="max-w-sm text-sm leading-7 text-[var(--color-text-soft)]">
+            <p className="max-w-md text-sm leading-7 text-[var(--color-text-soft)] sm:text-[0.95rem]">
               Clean modern dentistry, comfortable care, Dhabeji branch access, and FCPS online
               training in one structured experience.
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div className="grid gap-3 sm:grid-cols-2">
               <Link
                 href={appointmentHref}
-                className="rounded-full bg-[var(--color-primary)] px-5 py-3 text-sm font-bold text-white"
+                className="inline-flex items-center justify-center rounded-full bg-[var(--color-primary)] px-5 py-3 text-sm font-bold text-white shadow-[0_14px_34px_rgba(0,56,87,0.16)]"
               >
                 Add Appointment
               </Link>
               <a
                 href={callHref}
-                className="rounded-full border border-[var(--border-soft)] px-5 py-3 text-sm font-semibold text-[var(--color-primary)]"
+                className="inline-flex items-center justify-center rounded-full border border-[var(--border-soft)] bg-white/80 px-5 py-3 text-sm font-semibold text-[var(--color-primary)]"
               >
                 Call Now
               </a>
             </div>
           </div>
 
-          <div>
+          <div className="min-w-0 text-left">
             <p className="text-[0.72rem] font-bold uppercase tracking-[0.24em] text-[var(--color-primary)]">
               Company
             </p>
@@ -69,7 +77,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
+          <div className="min-w-0 text-left">
             <p className="text-[0.72rem] font-bold uppercase tracking-[0.24em] text-[var(--color-primary)]">
               Treatments
             </p>
@@ -82,7 +90,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
+          <div className="col-span-2 min-w-0 text-left lg:col-span-1">
             <p className="text-[0.72rem] font-bold uppercase tracking-[0.24em] text-[var(--color-primary)]">
               Contact
             </p>
@@ -97,7 +105,7 @@ export default function Footer() {
                 appointments@thedentalzone.com
               </a>
             </div>
-            <div className="mt-5 flex items-center gap-3">
+            <div className="mt-6 grid grid-flow-col justify-start gap-3">
               {socialLinks.map((item) => (
                 <a
                   key={item.label}
@@ -105,7 +113,7 @@ export default function Footer() {
                   target={item.href.startsWith("http") ? "_blank" : undefined}
                   rel={item.href.startsWith("http") ? "noreferrer" : undefined}
                   aria-label={item.label}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border-soft)] text-[var(--color-primary)] transition duration-200 hover:border-[var(--color-primary)] hover:bg-white"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border-soft)] bg-white/84 text-[var(--color-primary)] transition duration-200 hover:border-[var(--color-primary)] hover:bg-white"
                 >
                   {item.icon}
                 </a>
@@ -114,9 +122,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-[var(--border-soft)] pt-6 text-sm text-[var(--color-text-soft)] md:flex-row md:items-center md:justify-between">
+        <div className="mt-12 grid gap-3 border-t border-[var(--border-soft)] pt-6 text-left text-sm text-[var(--color-text-soft)] md:grid-cols-[1fr_auto] md:items-center">
           <p>&copy; 2026 {siteName}. All rights reserved.</p>
-          <p>Modern dental care with structured patient flow.</p>
+          <p className="md:text-right">Modern dental care with structured patient flow.</p>
         </div>
       </div>
     </footer>

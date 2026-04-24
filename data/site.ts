@@ -7,7 +7,6 @@ export const whatsappHref = "https://wa.me/923362130181";
 export const appointmentHref = "/contact";
 
 export const navItems = [
-  { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Dhabeji Clinic", href: "/clinics/dhabeji" },
   { label: "FCPS Online Training", href: "/fcps-training" },
@@ -185,21 +184,25 @@ export const googleReviews = [
     author: "Areeba S.",
     rating: 5,
     text: "Very clean clinic, polite staff, and the doctor explained everything in a very simple way.",
+    href: "https://www.google.com/maps/search/?api=1&query=The%20Dental%20Zone%2C%20Iftikhar%20Memorial%20Hospital%2C%20Gulshan-e-Hadeed%20Phase%202",
   },
   {
     author: "Hamza R.",
     rating: 5,
     text: "One of the smoothest dental visits I have had. Booking, treatment, and follow-up all felt professional.",
+    href: "https://www.google.com/maps/search/?api=1&query=The%20Dental%20Zone%2C%20Iftikhar%20Memorial%20Hospital%2C%20Gulshan-e-Hadeed%20Phase%202",
   },
   {
     author: "Sana K.",
     rating: 5,
     text: "The team was gentle and caring. I especially liked how clear they were about cost and treatment options.",
+    href: "https://www.google.com/maps/search/?api=1&query=The%20Dental%20Zone%2C%20Iftikhar%20Memorial%20Hospital%2C%20Gulshan-e-Hadeed%20Phase%202",
   },
   {
     author: "M. Danish",
     rating: 5,
     text: "Dhabeji clinic is neat, family friendly, and easy to recommend for routine dental care.",
+    href: "https://www.google.com/maps/search/?api=1&query=The%20Dental%20Zone%2C%20Iftikhar%20Memorial%20Hospital%2C%20Gulshan-e-Hadeed%20Phase%202",
   },
 ];
 
@@ -252,6 +255,14 @@ export const locationInfo = {
   mapQuery: "Dhabeji Clinic Karachi Pakistan",
   mapEmbed:
     "https://www.google.com/maps?q=Dhabeji%20Clinic%20Karachi%20Pakistan&output=embed",
+};
+
+export const mainClinicLocation = {
+  title: "The Dental Zone Hadeed",
+  address: "The Dental Zone, Iftikhar Memorial Hospital, Gulshan-e-Hadeed Phase 2",
+  mapQuery: "The Dental Zone, Iftikhar Memorial Hospital, Gulshan-e-Hadeed Phase 2",
+  mapEmbed:
+    "https://www.google.com/maps?q=The%20Dental%20Zone%2C%20Iftikhar%20Memorial%20Hospital%2C%20Gulshan-e-Hadeed%20Phase%202&output=embed",
 };
 
 export const dhabejiClinicPage = {

@@ -9,6 +9,7 @@ type ReviewItem = {
   rating: number;
   text: string;
   timeAgo?: string;
+  href?: string;
 };
 
 function scrollToReview(element: HTMLDivElement | null, direction: "prev" | "next") {
@@ -248,10 +249,13 @@ export default function ReviewSlider({
             className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:px-14"
           >
             {reviews.map((review, index) => (
-              <article
+              <a
                 key={`${review.author}-${review.text}`}
+                href={review.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 data-review-slide="true"
-                className="min-w-[85%] snap-start rounded-[1.1rem] bg-[#f7f5f5] p-4 shadow-[0_10px_30px_rgba(15,23,42,0.04)] sm:min-w-[22rem] sm:p-5 lg:min-w-[19rem]"
+                className="min-w-[85%] snap-start rounded-[1.1rem] bg-[#f7f5f5] p-4 shadow-[0_10px_30px_rgba(15,23,42,0.04)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_34px_rgba(15,23,42,0.08)] sm:min-w-[22rem] sm:p-5 lg:min-w-[19rem]"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex min-w-0 items-center gap-3">
@@ -287,14 +291,7 @@ export default function ReviewSlider({
                 <p className="mt-4 text-[0.96rem] leading-7 text-[#111827] sm:text-[1.02rem] sm:leading-8">
                   {review.text}
                 </p>
-
-                <button
-                  type="button"
-                  className="mt-4 text-base font-medium text-[#8a8f96] transition duration-300 hover:text-[#5f666f]"
-                >
-                  Read more
-                </button>
-              </article>
+              </a>
             ))}
           </div>
         </div>

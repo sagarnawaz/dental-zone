@@ -27,7 +27,7 @@ export type ClinicHeroMetric = {
 };
 
 type ClinicHeroSliderProps = {
-  badge: string;
+  badge?: string;
   title: string;
   accent: string;
   description: string;
@@ -195,9 +195,11 @@ export default function ClinicHeroSlider({
           )}
         >
           <div className={cn("self-center", isMinimal ? "max-w-3xl" : "max-w-3xl lg:self-end")}>
-            <span className="inline-flex rounded-full border border-white/16 bg-white/10 px-4 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.34em] text-white/72 backdrop-blur-md">
-              {badge}
-            </span>
+            {badge ? (
+              <span className="inline-flex rounded-full border border-white/16 bg-white/10 px-4 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.34em] text-white/72 backdrop-blur-md">
+                {badge}
+              </span>
+            ) : null}
             <h1 className="mt-6 font-heading text-5xl font-extrabold leading-[0.92] tracking-[-0.07em] text-white sm:text-6xl lg:text-7xl">
               {title}
               <br />

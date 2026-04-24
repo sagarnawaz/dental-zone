@@ -1,15 +1,68 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type ClientReviewVideoProps = {
   title: string;
 };
 
 export default function ClientReviewVideo({ title }: ClientReviewVideoProps) {
+  const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [isInViewport, setIsInViewport] = useState(false);
+
+  useEffect(() => {
+    const element = sectionRef.current;
+
+    if (!element) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInViewport(entry?.isIntersecting ?? false);
+      },
+      { threshold: 0.6 },
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video) {
+      return;
+    }
+
+    if (!isInViewport) {
+      video.pause();
+      setIsPlaying(false);
+      return;
+    }
+
+    video.muted = true;
+    setIsMuted(true);
+
+    const autoplay = async () => {
+      try {
+        if (video.ended) {
+          video.currentTime = 0;
+        }
+
+        await video.play();
+        setIsPlaying(true);
+      } catch {
+        setIsPlaying(false);
+      }
+    };
+
+    void autoplay();
+  }, [isInViewport]);
 
   async function handlePlay() {
     const video = videoRef.current;
@@ -57,7 +110,7 @@ export default function ClientReviewVideo({ title }: ClientReviewVideoProps) {
   }
 
   return (
-    <div className="card-surface w-full max-w-[22rem] overflow-hidden p-4 sm:max-w-[24rem]">
+    <div ref={sectionRef} className="card-surface w-full max-w-[22rem] overflow-hidden p-4 sm:max-w-[24rem]">
       <div className="relative aspect-[9/16] overflow-hidden rounded-[1.6rem] bg-[#06283f]">
         <video
           ref={videoRef}

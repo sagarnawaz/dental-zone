@@ -12,6 +12,7 @@ type ReviewItem = {
   rating: number;
   text: string;
   timeAgo?: string;
+  href?: string;
 };
 
 export default function LazyReviewSlider({

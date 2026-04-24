@@ -54,10 +54,10 @@ export default function Navbar() {
                   preload
                 />
               </div>
-              <div className="hidden min-w-0 sm:block">
+              <div className="min-w-0">
                 <p
                   className={cn(
-                    "truncate text-sm font-bold tracking-[-0.03em] transition duration-300",
+                    "truncate text-xs font-bold tracking-[-0.03em] transition duration-300 sm:text-sm",
                     isScrolled ? "text-[var(--color-primary)]" : "text-white",
                   )}
                 >
@@ -65,7 +65,7 @@ export default function Navbar() {
                 </p>
                 <p
                   className={cn(
-                    "mt-0.5 truncate text-[0.68rem] font-semibold uppercase tracking-[0.22em] transition duration-300",
+                    "mt-0.5 truncate text-[0.6rem] font-semibold uppercase tracking-[0.18em] transition duration-300 sm:text-[0.68rem] sm:tracking-[0.22em]",
                     isScrolled ? "text-[var(--color-text-soft)]" : "text-white/68",
                   )}
                 >
@@ -85,7 +85,7 @@ export default function Navbar() {
                   >
                     <div
                       className={cn(
-                        "flex items-center rounded-full pl-4 pr-2 py-2 text-sm font-semibold transition duration-300",
+                        "flex items-center gap-1.5 rounded-full px-4 py-3 text-sm font-semibold transition duration-300",
                         isActive(pathname, item.href)
                           ? "bg-[var(--color-primary)] text-white"
                           : isScrolled
@@ -95,7 +95,7 @@ export default function Navbar() {
                     >
                       <button
                         type="button"
-                        className="py-1 pr-2"
+                        className="leading-none"
                         aria-expanded={isDesktopServicesOpen}
                         aria-controls="desktop-services-menu"
                         onClick={() => setIsDesktopServicesOpen((value) => !value)}
@@ -104,7 +104,7 @@ export default function Navbar() {
                       </button>
                       <button
                         type="button"
-                        className="grid size-9 place-items-center rounded-full transition hover:bg-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                        className="grid h-5 w-5 shrink-0 place-items-center rounded-full transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                         aria-expanded={isDesktopServicesOpen}
                         aria-controls="desktop-services-menu"
                         aria-label="Toggle services menu"
@@ -117,18 +117,18 @@ export default function Navbar() {
                     <div
                       id="desktop-services-menu"
                       className={cn(
-                        "absolute left-0 top-[calc(100%+0.85rem)] w-[19rem] rounded-[1.5rem] border border-white/80 bg-white/96 p-3 text-[var(--color-primary)] shadow-[0_28px_80px_rgba(15,23,42,0.16)] backdrop-blur-xl transition duration-200",
+                        "absolute left-0 top-[calc(100%+0.85rem)] w-[14rem] rounded-[1.35rem] border border-white/80 bg-white/96 p-2.5 text-[var(--color-primary)] shadow-[0_24px_70px_rgba(15,23,42,0.14)] backdrop-blur-xl transition duration-200",
                         isDesktopServicesOpen
                           ? "pointer-events-auto translate-y-0 opacity-100"
                           : "pointer-events-none -translate-y-2 opacity-0",
                       )}
                     >
-                      <div className="grid max-h-[20rem] gap-1 overflow-y-auto pr-1 [scrollbar-width:thin]">
+                      <div className="grid max-h-[18rem] gap-1 overflow-y-auto pr-1 [scrollbar-width:thin]">
                         {services.map((service) => (
                           <Link
                             key={service.slug}
                             href={`/services/${service.slug}`}
-                            className="rounded-[1rem] px-4 py-3 text-sm font-semibold tracking-[-0.02em] text-[var(--color-primary)] transition duration-300 hover:bg-[#f7fafc]"
+                            className="rounded-[0.9rem] px-3 py-2.5 text-[0.92rem] font-semibold tracking-[-0.02em] text-[var(--color-primary)] transition duration-300 hover:bg-[#f7fafc]"
                             onClick={() => setIsDesktopServicesOpen(false)}
                           >
                             {service.name}
